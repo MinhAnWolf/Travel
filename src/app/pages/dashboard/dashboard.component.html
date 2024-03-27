@@ -1,0 +1,281 @@
+<div class="row">
+  <!-- --------------------------------------------------------------------------- -->
+  <!-- Sales Overview -->
+  <!-- --------------------------------------------------------------------------- -->
+  <div class="col-sm-12 col-lg-6">
+    <mat-card class="mat-mdc-card mdc-card cardWithShadow" style="background-image: url('/assets/images/backgrounds/banner-1.jpg'); background-size: cover; background-position: center;">
+      <mat-card-content class="mat-mdc-card-content p-32" >
+
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center social-chips"><img src="assets/images/profile/user-2.jpg" width="40" alt="social" class="rounded-circle">
+            <img src="assets/images/profile/user-3.jpg" width="40" alt="social" class="rounded-circle">
+            <img src="assets/images/profile/user-4.jpg" width="40" alt="social" class="rounded-circle">
+            <img src="assets/images/profile/user-5.jpg" width="40" alt="social" class="rounded-circle">
+          </div>
+          <button mat-mini-fab="" class="text-primary bg-light-primary shadow-none rounded mdc-fab mdc-fab--mini mat-mdc-mini-fab mat-accent mat-mdc-button-base" mat-ripple-loader-uninitialized="" mat-ripple-loader-class-name="mat-mdc-button-ripple">
+            <span class="mat-mdc-button-persistent-ripple mdc-fab__ripple"></span>
+            <span class="mdc-button__label">
+              <i-tabler name="bell-ringing" class="icon-20 d-flex"></i-tabler>
+            </span>
+            <span class="mat-mdc-focus-indicator"></span>
+            <span class="mat-mdc-button-touch-target"></span>
+          </button>
+        </div>
+        <mat-card class="mat-mdc-card mdc-card cardWithShadow" style="width: 260px; margin-top: 77px;">
+          <mat-card-content >
+            <mat-card-title class="mat-mdc-card-title">Chuyến đi Nha Trang </mat-card-title>
+            <mat-card-subtitle class="mat-mdc-card-subtitle mat-body-4">
+              Nha Trang, 16/08/2002
+            </mat-card-subtitle>
+  
+            <div class="text-center m-t-6">
+              <img src="assets/images/theme/map.png" alt="social" class="rounded" style="width: 215px;">
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <!-- --------------------------------------------------------------------------- -->
+  <!-- end Sales overview -->
+  <!-- --------------------------------------------------------------------------- -->
+
+  <div class="col-sm-12 col-lg-6">
+    <!-- --------------------------------------------------------------------------- -->
+    <!-- Monthly Earnings -->
+    <!-- --------------------------------------------------------------------------- -->
+    <mat-card class="cardWithShadow">
+      <mat-card-content class="m-b-32 p-x-24">
+        <div class="text-center">
+          <img src="/assets/images/svgs/location.svg" alt="" >
+        </div>
+        <h4 class="mat-headline-5 text-center">Have a good day, Triều Nguyễn</h4>
+        <mat-card-subtitle class="mat-mdc-card-subtitle mat-body-1 text-center m-t-16">
+          Chúng tôi trân trọng từng chuyến đi của bạn. Chúc bạn sẽ có một trải nghiệm tuyệt vời cùng bạn bè và người thân!
+        </mat-card-subtitle>
+        <div class="text-center">
+          <mat-form-field appearance="outline" style="width: 320px; margin-top: 15px; margin-right: 10px;" color="primary">
+            <input matInput  placeholder="Tôi muốn đi ...."/>
+          </mat-form-field>
+
+          <br>
+          <a [routerLink]="['/']" mat-flat-button  class="m-t-10" style="background-color: #F97316; color: #ffffff;">
+            Tạo chuyến đi
+          </a>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="col-lg-8">
+    <mat-card class="cardWithShadow">
+      <mat-card-content class="p-24">
+        <mat-card-title>Các chuyến đi của tôi</mat-card-title>
+        <div class="table-responsive m-t-16">
+          <table mat-table [dataSource]="dataSource" class="w-100">
+            <!-- Position Column -->
+            <ng-container matColumnDef="assigned">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                class="f-w-600 mat-subtitle-1 f-s-14"
+              >
+                Assigned
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <div class="d-flex align-items-center">
+                  <img
+                    [src]="element.imagePath"
+                    alt="users"
+                    width="40"
+                    class="rounded-circle"
+                  />
+                  <div class="m-l-16">
+                    <h6 class="mat-subtitle-1 f-s-14 f-w-600">
+                      {{ element.uname }}
+                    </h6>
+                    <span class="mat-body-1 f-s-12">
+                      {{ element.position }}
+                    </span>
+                  </div>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                class="f-w-600 mat-subtitle-1 f-s-14"
+              >
+                Name
+              </th>
+              <td mat-cell *matCellDef="let element" class="mat-body-1">
+                {{ element.productName }}
+              </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="priority">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                class="f-w-600 mat-subtitle-1 f-s-14"
+              >
+                Priority
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <ng-template [ngIf]="element.priority == 'low'">
+                  <span
+                    class="bg-light-accent text-accent rounded f-w-600 p-6 p-y-4 f-s-12"
+                  >
+                    {{ element.priority | titlecase }}
+                  </span>
+                </ng-template>
+                <ng-template [ngIf]="element.priority == 'medium'">
+                  <span
+                    class="bg-light-primary text-primary rounded f-w-600 p-6 p-y-4 f-s-12"
+                  >
+                    {{ element.priority | titlecase }}
+                  </span>
+                </ng-template>
+                <ng-template [ngIf]="element.priority == 'high'">
+                  <span
+                    class="bg-light-warning text-warning rounded f-w-600 p-6 p-y-4 f-s-12"
+                  >
+                    {{ element.priority | titlecase }}
+                  </span>
+                </ng-template>
+                <ng-template [ngIf]="element.priority == 'critical'">
+                  <span
+                    class="bg-light-error text-error rounded f-w-600 p-6 p-y-4 f-s-12"
+                  >
+                    {{ element.priority | titlecase }}
+                  </span>
+                </ng-template>
+                <ng-template [ngIf]="element.priority == 'moderate'">
+                  <span
+                    class="bg-light-success text-success rounded f-w-600 p-6 p-y-4 f-s-12"
+                  >
+                    {{ element.priority | titlecase }}
+                  </span>
+                </ng-template>
+              </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="budget">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                class="f-w-600 mat-subtitle-1 f-s-14"
+              >
+                Budget
+              </th>
+              <td mat-cell *matCellDef="let element" class="mat-body-1">
+                ${{ element.budget }}k
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="col-lg-4">
+    <mat-card class="cardWithShadow">
+      <mat-card-content class="p-24">
+        <mat-card-title>Lịch trình cho chuyến đi</mat-card-title>
+
+        <div class="timeline m-t-24">
+          <div
+            class="timeline-item d-flex overflow-hidden"
+            *ngFor="let stat of stats"
+          >
+            <div class="time text-right mat-subtitle-1 f-s-14">
+              {{ stat.time }}
+            </div>
+            <div class="point d-flex align-items-center">
+              <span class="timeline-badge border-{{ stat.color }} m-y-8"></span>
+              <span class="timline-border d-block"></span>
+            </div>
+            <div class="desc">
+              <ng-template [ngIf]="stat.subtext">
+                <span class="mat-subtitle-1 f-s-14 lh-20">{{
+                  stat.subtext
+                }}</span>
+              </ng-template>
+              <ng-template [ngIf]="stat.title">
+                <span class="mat-subtitle-1 f-s-14 lh-20 f-w-600 d-block">{{
+                  stat.title
+                }}</span>
+              </ng-template>
+              <ng-template [ngIf]="stat.link">
+                <a href="#" class="text-primary text-decoration-none mat-body-1"
+                  >Xem vị trí bản đồ</a
+                >
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-6 col-lg-3" *ngFor="let productcard of productcards">
+    <mat-card class="cardWithShadow productcard overflow-hidden">
+      <a routerLink="/widgets/cards">
+        <img
+          src="{{ productcard.imgSrc }}"
+          alt="imgSrc"
+          class="w-100"
+          mat-card-image
+        />
+      </a>
+      <mat-card-content class="p-b-24 p-t-12 position-relative">
+        <button
+          mat-mini-fab
+          color="primary"
+          class="icon-30 cart-btn"
+          matTooltip="Thêm vào mục ưu thích"
+        >
+          <i-tabler name="heart" class="icon-16"></i-tabler>
+        </button>
+        <mat-card-title class="mat-headline-2 f-s-16 m-b-4">{{
+          productcard.title
+        }}</mat-card-title>
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center">
+            <h6 class="mat-body-2 f-w-600">{{ productcard.price }}</h6>
+            <span class="f-s-14 m-l-4 text-decoration-line-through"
+              >{{ productcard.rprice }}</span
+            >
+          </div>
+          <div class="m-l-auto d-flex gap-4">
+            <span
+              ><i-tabler name="star" class="fill-warning icon-18"></i-tabler
+            ></span>
+            <span
+              ><i-tabler name="star" class="fill-warning icon-18"></i-tabler
+            ></span>
+            <span
+              ><i-tabler name="star" class="fill-warning icon-18"></i-tabler
+            ></span>
+            <span
+              ><i-tabler name="star" class="fill-warning icon-18"></i-tabler
+            ></span>
+            <span
+              ><i-tabler name="star" class="fill-warning icon-18"></i-tabler
+            ></span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

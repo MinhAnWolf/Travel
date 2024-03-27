@@ -1,0 +1,70 @@
+<mat-toolbar class="topbar">
+  <!-- Open Sidebar -->
+  <button mat-icon-button (click)="toggleMobileNav.emit()">
+    <i-tabler name="menu-2" class="icon-20 d-flex"></i-tabler>
+  </button>
+  <!-- --------------------------------------------------------------- -->
+
+  <span class="flex-1-auto"></span>
+
+  <!-- --------------------------------------------------------------- -->
+  <!-- profile Dropdown -->
+  <!-- --------------------------------------------------------------- -->
+
+
+  <mat-form-field appearance="outline" style="width: 640px; margin-top: 15px; margin-right: 10px;" color="primary">
+    <input matInput  placeholder="Tìm nơi du hí"/>
+  </mat-form-field>
+  
+  <button mat-icon-button aria-label="Notifications">
+    <i-tabler
+      class="d-flex"
+      name="bell"
+      matBadge=""
+      matBadgeColor="primary"
+    ></i-tabler>
+  </button>
+
+  <span class="" style="margin-right: 10px;">Triều Nguyễn</span>
+  <button
+    mat-icon-button
+    [matMenuTriggerFor]="profilemenu"
+    aria-label="Notifications"
+  >
+    <img
+      src="/assets/images/profile/user-5.jpg"
+      class="rounded-circle object-cover icon-35 profile-dd"
+      width="35" height="35"
+    />
+  </button>
+  <mat-menu #profilemenu="matMenu" class="topbar-dd cardWithShadow">
+    <button mat-menu-item>
+      <mat-icon class="d-flex align-items-center"
+        ><i-tabler name="user" class="icon-18 d-flex"></i-tabler></mat-icon
+      >Cá nhân
+    </button>
+    <button mat-menu-item>
+      <mat-icon class="d-flex align-items-center"
+        ><i-tabler name="mail" class="icon-18 d-flex"></i-tabler></mat-icon
+      >My Account
+    </button>
+    <button mat-menu-item>
+      <mat-icon class="d-flex align-items-center"
+        ><i-tabler
+          name="list-check"
+          class="icon-18 d-flex"
+        ></i-tabler></mat-icon
+      >Chuyến đi của tôi
+    </button>
+
+    <div class="p-x-12 m-t-12">
+      <a
+        [routerLink]="['/authentication/login']"
+        mat-stroked-button
+        color="primary"
+        class="w-100"
+        >Đăng xuất</a
+      >
+    </div>
+  </mat-menu>
+</mat-toolbar>
