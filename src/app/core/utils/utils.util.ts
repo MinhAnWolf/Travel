@@ -1,3 +1,9 @@
+/**
+ * Parse json.
+ *
+ * @param str any
+ * @author Nguyễn Huỳnh Đông Triều
+ * */
 export function jsonParse(str: any) {
     if (!str) {
       return null;
@@ -7,5 +13,4 @@ export function jsonParse(str: any) {
     }
     return JSON.parse(str);
   }
-  
-  
+

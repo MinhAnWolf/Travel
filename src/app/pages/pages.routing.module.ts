@@ -9,4 +9,11 @@ export const PagesRoutes: Routes = [
       title: 'Starter Page',
     },
   },
+  {
+    path: '',
+    component: AppDashboardComponent,
+    data: {
+      title: 'Starter Page',
+    },
+  },
 ];
