@@ -17,6 +17,9 @@ import { AppListsComponent } from './lists/lists.component';
 import { AppMenuComponent } from './menu/menu.component';
 import { AppTooltipsComponent } from './tooltips/tooltips.component';
 import { MatNativeDateModule } from '@angular/material/core';
+import { CreateTripModalComponent } from './modal/create-trip-modal/create-trip-modal.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { NgxFileDragDropModule } from 'ngx-file-drag-drop';
 
 @NgModule({
   imports: [
@@ -27,6 +30,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     ReactiveFormsModule,
     TablerIconsModule.pick(TablerIcons),
     MatNativeDateModule,
+    NgSelectModule,
+    NgxFileDragDropModule
   ],
   declarations: [
     AppBadgeComponent,
@@ -34,6 +39,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     AppListsComponent,
     AppMenuComponent,
     AppTooltipsComponent,
+    CreateTripModalComponent
   ],
 })
 export class UicomponentsModule {}
