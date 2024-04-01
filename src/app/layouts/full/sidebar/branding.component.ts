@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateTripModalComponent } from 'src/app/pages/ui-components/modal/create-trip-modal/create-trip-modal.component';
 
 @Component({
   selector: 'app-branding',
@@ -21,6 +23,7 @@ import { Component } from '@angular/core';
         target="_blank"
         class="d-flex justify-content-center m-t-20"
         style="margin-right: 10px; background-color: #F97316; color: #ffffff;"
+        (click)="openModal()"
       >
         Tạo chuyến đi
       </a>
@@ -28,5 +31,26 @@ import { Component } from '@angular/core';
   `,
 })
 export class BrandingComponent {
-  constructor() {}
+  constructor(
+    private dialog: MatDialog,
+  ) {}
+
+
+  /**
+   * Open modal view detail.
+   *
+   * @param element
+   * @param action
+   */
+  public openModal(): void {
+    const dialogRef = this.dialog.open(CreateTripModalComponent, {
+      data: {}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+      }
+    });
+  }
+
+
 }
