@@ -14,3 +14,7 @@ export function jsonParse(str: any) {
     return JSON.parse(str);
   }
 
+export function isNull(value: string):boolean {
+  return value === null;
+}
+
