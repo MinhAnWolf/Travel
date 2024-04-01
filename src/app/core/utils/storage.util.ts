@@ -1,5 +1,7 @@
 import {CookieService} from "ngx-cookie-service";
+import {Injectable} from "@angular/core";
 
+@Injectable({ providedIn: 'root' })
 export class StorageUtil{
   constructor(private cookieService: CookieService) {}
 
@@ -21,8 +23,8 @@ export class StorageUtil{
     return this.cookieService.get("Authorization")
   }
 
-  public setCookieRf(key:string) {
-    this.cookieService.set("rf_key", key)
+  public setCookieOnlyRf(key:string) {
+    this.cookieService.set("rf", key, undefined, undefined, undefined, true, 'Strict')
   }
 
   public setCookieAt(key:string) {

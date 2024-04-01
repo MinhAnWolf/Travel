@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {FormControl, FormControlName, FormGroup} from "@angular/forms";
+import {UserModel} from "../../../model/auth.model";
+import {AuthenticationService} from "../../../core/services/authentication.service";
 
 @Component({
   selector: 'app-login',
@@ -7,12 +9,15 @@ import {FormControl, FormControlName, FormGroup} from "@angular/forms";
 })
 export class AppSideLoginComponent {
   loginForm:FormGroup
-  constructor() {
+  constructor(private auth: AuthenticationService) {
     this.init();
   }
 
   login() {
-    console.log(this.loginForm);
+    let user: UserModel = <UserModel> this.loginForm.value
+    this.auth.apiLogin(user).subscribe(data => {
+      console.log(data)
+    })
   }
 
   private init() {
