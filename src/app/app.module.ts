@@ -52,7 +52,8 @@ import {HttpInterceptorSupport} from "./core/interceptor/http-interceptor";
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorSupport,
       multi: true
-    }
+    },
+
   ],
   exports: [TablerIconsModule],
   bootstrap: [AppComponent],
