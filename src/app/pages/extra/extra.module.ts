@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -17,6 +17,7 @@ import { MapComponent } from './map/map.component';
 import { CalendaComponent } from './calenda/calenda.component';
 import { SettingComponent } from './setting/setting.component';
 import { FriendComponent } from './friend/friend.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { FriendComponent } from './friend/friend.component';
     FormsModule,
     ReactiveFormsModule,
     TablerIconsModule.pick(TablerIcons),
+    NgxSpinnerModule.forRoot()
   ],
   declarations: [
     AppIconsComponent,
@@ -38,5 +40,6 @@ import { FriendComponent } from './friend/friend.component';
     SettingComponent,
     FriendComponent
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ExtraModule {}

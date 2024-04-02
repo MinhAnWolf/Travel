@@ -27,7 +27,8 @@
             "styles": [
               "src/styles.scss",
               "src/assets/scss/style.scss",
-              "src/assets/scss/helpers/_scrollbar.scss"
+              "src/assets/scss/helpers/_scrollbar.scss",
+              "node_modules/ngx-spinner/animations/ball-clip-rotate.css"
             ],
             "scripts": []
           },
