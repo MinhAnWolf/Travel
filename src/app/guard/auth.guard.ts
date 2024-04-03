@@ -13,7 +13,7 @@ export const AuthGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const authenticationService = inject(AuthenticationService);
   let result:boolean = true;
-  if (at.valueOf() == "undefined" || rf.valueOf() == "undefined") {
+  if (at.valueOf() == "undefined" || rf.valueOf() == "undefined" || at == "" || rf == "") {
       router.navigate(['/authentication/login']).then(r =>
         console.log(r)
       )
