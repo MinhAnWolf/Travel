@@ -5,11 +5,13 @@ import {AuthenticationService} from "../services/authentication.service";
 import {StorageUtil} from "../utils/storage.util";
 import {ResponseAuthModel} from "../../model/response-auth.model";
 import {isNull} from "../utils/utils.util";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class HttpInterceptorSupport implements HttpInterceptor {
 
-    constructor(private storageUtil: StorageUtil) {}
+    constructor(private storageUtil: StorageUtil,
+                private router: Router) {}
 
     // @ts-ignore
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -30,6 +32,10 @@ export class HttpInterceptorSupport implements HttpInterceptor {
               this.storageUtil.setCookieOnlyRf("rf", response.rf)
             }
           }
+        }, error => {
+          console.log(error);
+          this.router.navigate(['/authentication/login']).then(r =>
+            console.log(r))
         })
       );
     }

@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { AppDashboardComponent } from './dashboard/dashboard.component';
+import {AuthGuard} from "../guard/auth.guard";
 
 export const PagesRoutes: Routes = [
   {
@@ -8,12 +9,6 @@ export const PagesRoutes: Routes = [
     data: {
       title: 'Starter Page',
     },
-  },
-  {
-    path: '',
-    component: AppDashboardComponent,
-    data: {
-      title: 'Starter Page',
-    },
+    canActivate: [AuthGuard]
   },
 ];
