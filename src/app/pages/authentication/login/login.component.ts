@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
-import {FormControl, FormControlName, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 import {UserModel} from "../../../model/auth.model";
 import {AuthenticationService} from "../../../core/services/authentication.service";
 import {ResponseAuthModel} from "../../../model/response-auth.model";
 import {StorageUtil} from "../../../core/utils/storage.util";
 import {Router} from "@angular/router";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
+  providers: [CookieService]
 })
 export class AppSideLoginComponent {
   loginForm:FormGroup
@@ -23,10 +25,10 @@ export class AppSideLoginComponent {
     this.auth.apiLogin(user).subscribe(data => {
       if (data != null) {
         let response:ResponseAuthModel = <ResponseAuthModel> data;
+        console.log(response)
         this.storageUtil.setCookieAt("Authorization", response.token)
-        this.storageUtil.setCookieOnlyRf("rf", response.rf)
-        this.router.navigate(['/dashboard'])
-          .then(r => console.log(r));
+        this.storageUtil.setCookieOnlyRf("rf", "Bearer " + response.rf)
+        this.router.navigate(['/dashboard']);
       }
 
     })

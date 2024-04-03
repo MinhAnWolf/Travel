@@ -11,7 +11,7 @@ export class StorageUtil{
    * @author Minh An
    * */
   public get getCookieRf()  {
-    return this.cookieService.get("rf_key")
+    return this.cookieService.get("rf")
   }
 
   /**
@@ -23,11 +23,11 @@ export class StorageUtil{
     return this.cookieService.get("Authorization")
   }
 
-  public setCookieOnlyRf(key:string, value:string) {
-    this.cookieService.set(key, value, undefined, undefined, undefined, true, 'Strict')
+  public setCookieOnlyRf(key:string, value:any) {
+    this.cookieService.set(key, value, undefined, "/", undefined, true, 'Strict')
   }
 
-  public setCookieAt(key:string, value:string) {
-    this.cookieService.set(key, value)
+  public setCookieAt(key:string, value:any) {
+    this.cookieService.set(key, value, undefined, "/", undefined, true, 'Strict')
   }
 }
