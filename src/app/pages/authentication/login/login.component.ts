@@ -26,8 +26,9 @@ export class AppSideLoginComponent {
       if (data != null) {
         let response:ResponseAuthModel = <ResponseAuthModel> data;
         console.log(response)
-        this.storageUtil.setCookieAt("Authorization", response.token)
-        this.storageUtil.setCookieOnlyRf("rf", "Bearer " + response.rf)
+        this.storageUtil.setCookie("Authorization", response.token)
+        this.storageUtil.setCookieOnly("rf", "Bearer " + response.rf)
+        this.storageUtil.setCookie("c_id", response.uid)
         this.router.navigate(['/dashboard']);
       }
 
