@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
 import { AppDashboardComponent } from './dashboard/dashboard.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [AppDashboardComponent],
@@ -17,6 +18,7 @@ import { AppDashboardComponent } from './dashboard/dashboard.component';
     FormsModule,
     RouterModule.forChild(PagesRoutes),
     TablerIconsModule.pick(TablerIcons),
+    NgxSpinnerModule.forRoot()
   ],
   exports: [TablerIconsModule],
 })

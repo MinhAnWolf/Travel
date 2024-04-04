@@ -1,17 +1,12 @@
-import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { TripService } from 'src/app/core/services/trip.service';
+import { GetTimelineTripRequestModel } from 'src/app/model/get-timeline-trip-request.model';
+import { TimelineTripModel } from 'src/app/model/timeline-trip.model';
 
 interface month {
   value: string;
   viewValue: string;
-}
-
-interface stats {
-  id: number;
-  time: string;
-  color: string;
-  title?: string;
-  subtext?: string;
-  link?: string;
 }
 
 export interface productsData {
@@ -77,53 +72,50 @@ const ELEMENT_DATA: productsData[] = [
   templateUrl: './dashboard.component.html',
   encapsulation: ViewEncapsulation.None,
 })
-export class AppDashboardComponent {
+export class AppDashboardComponent implements OnInit {
+
+  listTimelineTrip: TimelineTripModel[] = [];
+
+  constructor(
+    private spinner: NgxSpinnerService,
+    private tripService : TripService
+  ) {}
+
+  ngOnInit(): void {
+    this.getTimelineTrip();
+  }
+
+
+  getTimelineTrip(){
+    this.spinner.show();
+
+    const json:GetTimelineTripRequestModel = {
+      email: 'dongtrieuit@gmail.com',
+      tripId: 'f86f123b-890b-4ed7-984a-6b502c6d9dab',
+    }
+
+    this.tripService.getTimelineTrip(json).subscribe(
+      (res) => {
+        if(res && res.data){
+          this.listTimelineTrip = res.data;
+          setTimeout(() => {
+            this.spinner.hide();
+          }, 5000);
+        }
+      },
+      (error) => {
+        console.error('Error occurred:', error);
+        setTimeout(() => {
+          this.spinner.hide();
+        }, 5000);
+      }
+    );
+  }
+
+
 
   displayedColumns: string[] = ['assigned', 'name', 'priority', 'budget'];
-  dataSource = ELEMENT_DATA;
-
-  // recent transaction
-  stats: stats[] = [
-    {
-      id: 1,
-      time: '07.30 am',
-      color: 'primary',
-      subtext: 'Khởi hành: Nhà nghỉ 456',
-    },
-    {
-      id: 2,
-      time: '08.00 am',
-      color: 'accent',
-      title: 'Bờ kè Cao Lãnh',
-      link: 'Xem vị trí bản đồ',
-    },
-    {
-      id: 3,
-      time: '08.30 pm',
-      color: 'success',
-      subtext: 'Di chuyển vào phà Phước Thành',
-    },
-    {
-      id: 4,
-      time: '09.00 pm',
-      color: 'warning',
-      title: 'KDL Chợ Quê Phước Thành',
-      link: 'Xem vị trí bản đồ',
-    },
-    {
-      id: 5,
-      time: '12.30 pm',
-      color: 'error',
-      title: 'KDL Nam Phương Linh Từ',
-      link: 'Xem vị trí bản đồ',
-    },
-    {
-      id: 6,
-      time: '12.30 pm',
-      color: 'success',
-      subtext: 'Hủ tiếu bà Chiểu',
-    },
-  ];
+  dataSource = ELEMENT_DATA;  
 
   // ecommerce card
   productcards: productcards[] = [
@@ -157,8 +149,4 @@ export class AppDashboardComponent {
     },
   ];
 
-  constructor() {
-
-
-  }
 }

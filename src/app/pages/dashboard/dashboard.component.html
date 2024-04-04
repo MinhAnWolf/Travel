@@ -1,3 +1,5 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "large" color = "#fff" type = "ball-clip-rotate" [fullScreen] = "true"><p style="color: white" > Chờ tớ xíu... </p></ngx-spinner>
+
 <div class="row">
   <!-- --------------------------------------------------------------------------- -->
   <!-- Sales Overview -->
@@ -194,28 +196,28 @@
         <div class="timeline m-t-24">
           <div
             class="timeline-item d-flex overflow-hidden"
-            *ngFor="let stat of stats"
+            *ngFor="let item of listTimelineTrip"
           >
             <div class="time text-right mat-subtitle-1 f-s-14">
-              {{ stat.time }}
+              {{ item.time }}
             </div>
             <div class="point d-flex align-items-center">
-              <span class="timeline-badge border-{{ stat.color }} m-y-8"></span>
+              <span class="timeline-badge border-{{ item.color }} m-y-8"></span>
               <span class="timline-border d-block"></span>
             </div>
             <div class="desc">
-              <ng-template [ngIf]="stat.subtext">
+              <ng-template [ngIf]="item.subtext">
                 <span class="mat-subtitle-1 f-s-14 lh-20">{{
-                  stat.subtext
+                  item.subtext
                 }}</span>
               </ng-template>
-              <ng-template [ngIf]="stat.title">
+              <ng-template [ngIf]="item.title">
                 <span class="mat-subtitle-1 f-s-14 lh-20 f-w-600 d-block">{{
-                  stat.title
+                  item.title
                 }}</span>
               </ng-template>
-              <ng-template [ngIf]="stat.link">
-                <a href="#" class="text-primary text-decoration-none mat-body-1"
+              <ng-template [ngIf]="item.link">
+                <a href="item.link" class="text-primary text-decoration-none mat-body-1"
                   >Xem vị trí bản đồ</a
                 >
               </ng-template>
