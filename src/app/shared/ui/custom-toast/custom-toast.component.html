@@ -1,0 +1,52 @@
+<div class="toaster">
+    <div class="toast-icon" [class]="options.toastClass">
+      <i-tabler *ngIf="options.toastClass === 'toast-icon custom-toast-success'" class="routeIcon"  name="check"  matListItemIcon ></i-tabler>
+      <i-tabler *ngIf="options.toastClass === 'toast-icon custom-toast-info'" class="routeIcon"  name="info-circle"  matListItemIcon ></i-tabler>
+      <i-tabler *ngIf="options.toastClass === 'toast-icon custom-toast-warning'" class="routeIcon"  name="alert-triangle"  matListItemIcon ></i-tabler>
+      <i-tabler *ngIf="options.toastClass === 'toast-icon custom-toast-error'" class="routeIcon"  name="x"  matListItemIcon ></i-tabler>
+    </div>
+    <div class="toast-details">
+      <div>
+        <div
+          *ngIf="title"
+          [class]="options.titleClass"
+          [attr.aria-label]="title"
+          class="custom-title"
+          style="margin-top: -20px;"
+        >
+          {{ title }}
+        </div>
+        <div
+          *ngIf="message && options.enableHtml"
+          role="alert"
+          aria-live="polite"
+          class="custom-message"
+          [class]="options.messageClass"
+          [innerHTML]="message"
+        ></div>
+        <div
+          *ngIf="message && !options.enableHtml"
+          role="alert"
+          aria-live="polite"
+          class="custom-message"
+          [class]="options.messageClass"
+          [attr.aria-label]="message"
+        >
+          {{ message }}
+        </div>
+      </div>
+    </div>
+    <div class="close-icon">
+      <a
+        *ngIf="options.closeButton"
+        (click)="remove()"
+        class="toast-close-button"
+      >
+        &times;
+      </a>
+    </div>
+  </div>
+  <div *ngIf="options.progressBar">
+    <div class="toast-progress" [style.width]="width + '%'"></div>
+  </div>
+  

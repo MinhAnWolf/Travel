@@ -19,7 +19,6 @@ import { SettingComponent } from './setting/setting.component';
 import { FriendComponent } from './friend/friend.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
-
 @NgModule({
   imports: [
     CommonModule,
@@ -28,7 +27,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     FormsModule,
     ReactiveFormsModule,
     TablerIconsModule.pick(TablerIcons),
-    NgxSpinnerModule.forRoot()
+    NgxSpinnerModule.forRoot(),
   ],
   declarations: [
     AppIconsComponent,
