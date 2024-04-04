@@ -8,9 +8,15 @@
     <div class="text-center" style="margin-top: 110px; margin-bottom: 110px;">
       <img src="/assets/images/vector/traveling-1.png" width="720px" height="460px">
       <br>
-      <a [routerLink]="['/']" mat-flat-button  class="m-t-10" style="background-color: #F97316; color: #ffffff;">
+      <a (click)="showSuccess()" mat-flat-button  class="m-t-10" style="background-color: #F97316; color: #ffffff;">
         Tạo chuyến đi
       </a>
     </div>
+
+<button (click)="showSuccessToast()">showSuccessToast</button>
+<button (click)="showInfoToast()">showInfoToast</button>
+<button (click)="showWarningToast()">showWarningToast</button>
+<button (click)="showErrorToast()">showErrorToast</button>
+<button (click)="removeToast()">Remove Toast</button>
   </mat-card-content>
 </mat-card>

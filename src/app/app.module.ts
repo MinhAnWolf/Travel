@@ -26,6 +26,9 @@ import { HeaderComponent } from './layouts/full/header/header.component';
 import { BrandingComponent } from './layouts/full/sidebar/branding.component';
 import { AppNavItemComponent } from './layouts/full/sidebar/nav-item/nav-item.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import {HttpInterceptorSupport} from "./core/interceptor/http-interceptor";
+import { ToastrModule } from 'ngx-toastr';
+import { CustomToastComponent } from './shared/ui/custom-toast/custom-toast.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     HeaderComponent,
     BrandingComponent,
     AppNavItemComponent,
+    CustomToastComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +50,13 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ReactiveFormsModule,
     MaterialModule,
     TablerIconsModule.pick(TablerIcons),
-    NgSelectModule
+    NgSelectModule,
+    ToastrModule.forRoot({
+      toastComponent: CustomToastComponent,
+      closeButton: true,
+      positionClass: 'toast-top-right',
+      newestOnTop: false, // added custom toast!
+    }), // ToastrModule added 
   ],
   providers: [
     {
