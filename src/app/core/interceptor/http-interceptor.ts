@@ -18,10 +18,6 @@ export class HttpInterceptorSupport implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const authToken = this.storageUtil.getCookieAt;
         const rfToken = this.storageUtil.getCookieRf
-        if (this.checkNull(authToken, rfToken)) {
-          return throwError('Authentication fail');
-        }
-
         const authReq = req.clone(
           {
             headers: req.headers.set('Authorization', authToken)
@@ -33,9 +29,17 @@ export class HttpInterceptorSupport implements HttpInterceptor {
           if (res instanceof HttpResponse) {
             let authRes = res.headers.get('Authorization');
             let rfRes = res.headers.get('rf');
-            if (authRes != null && rfRes != null) {
-              this.storageUtil.setCookieAt("Authorization", authRes)
-              this.storageUtil.setCookieOnlyRf("rf", "Bearer " + rfRes)
+            let c_id = res.headers.get('c_id');
+            if (authRes != null) {
+              this.storageUtil.setCookie("Authorization", authRes)
+            }
+
+            if (rfRes != null) {
+              this.storageUtil.setCookieOnly("rf", "Bearer " + rfRes)
+            }
+
+            if (c_id != null) {
+              this.storageUtil.setCookie("c_id", c_id);
             }
           }
         }, error => {

@@ -23,11 +23,11 @@ export class StorageUtil{
     return this.cookieService.get("Authorization")
   }
 
-  public setCookieOnlyRf(key:string, value:any) {
+  public setCookieOnly(key:string, value:any) {
     this.cookieService.set(key, value, undefined, "/", undefined, true, 'Strict')
   }
 
-  public setCookieAt(key:string, value:any) {
+  public setCookie(key:string, value:any) {
     this.cookieService.set(key, value, undefined, "/", undefined, true, 'Strict')
   }
 }
