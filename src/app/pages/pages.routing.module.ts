@@ -9,6 +9,5 @@ export const PagesRoutes: Routes = [
     data: {
       title: 'Starter Page',
     },
-    canActivate: [AuthGuard]
   },
 ];
