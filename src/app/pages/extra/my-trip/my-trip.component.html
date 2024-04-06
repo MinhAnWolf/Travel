@@ -1,22 +1,59 @@
-<!-- ============================================================== -->
-<!-- Simple four boxes Row -->
-<!-- ============================================================== -->
-<mat-card class="cardWithShadow">
-  <mat-card-content>
-    <!-- <mat-card-title>My trip</mat-card-title>
-    <mat-card-subtitle class="mat-body-1">This is test page</mat-card-subtitle> -->
-    <div class="text-center" style="margin-top: 110px; margin-bottom: 110px;">
-      <img src="/assets/images/vector/traveling-1.png" width="720px" height="460px">
-      <br>
-      <a (click)="showSuccess()" mat-flat-button  class="m-t-10" style="background-color: #F97316; color: #ffffff;">
-        Tạo chuyến đi
-      </a>
-    </div>
+<mat-card-title class="m-b-16">Chuyến đi của tôi</mat-card-title>
+<div class="text-center" style="margin-top: 110px; margin-bottom: 110px;" *ngIf="!productcards">
+  <img src="/assets/images/vector/traveling-1.png" width="720px" height="460px">
+  <br>
+  <a (click)="showSuccess()" mat-flat-button  class="m-t-10" style="background-color: #F97316; color: #ffffff;">
+    Tạo chuyến đi
+  </a>
+  <br>
 
-<button (click)="showSuccessToast()">showSuccessToast</button>
-<button (click)="showInfoToast()">showInfoToast</button>
-<button (click)="showWarningToast()">showWarningToast</button>
-<button (click)="showErrorToast()">showErrorToast</button>
-<button (click)="removeToast()">Remove Toast</button>
-  </mat-card-content>
-</mat-card>
+  <button (click)="showSuccessToast()">showSuccessToast</button>
+  <button (click)="showInfoToast()">showInfoToast</button>
+  <button (click)="showWarningToast()">showWarningToast</button>
+  <button (click)="showErrorToast()">showErrorToast</button>
+  <button (click)="removeToast()">Remove Toast</button>
+</div>
+
+<div class="row">
+  
+  <div class="col-sm-12 col-lg-6" *ngFor="let productcard of productcards">
+    <mat-card class="cardWithShadow productcard overflow-hidden">
+      <a>
+        <img
+          src="{{ productcard.coverImage }}"
+          alt="coverImage"
+          style="width: 100%; max-height: 200px; object-fit: cover; overflow: hidden;"
+          mat-card-image
+        />
+      </a>
+      <mat-card-content class="p-b-24 p-t-12 position-relative">
+    
+        <mat-card-title class="mat-headline-1 f-s-16 m-b-4">
+          {{ productcard.title }}
+        </mat-card-title>
+        <mat-card-subtitle class="mat-headline-2 f-s-14 m-b-4">
+          <i-tabler name="calendar" class="icon-16"></i-tabler>
+          <b style="margin-left: 10px;">Từ ngày: </b> <span>{{ productcard.startDate }}</span> 
+          <b style="margin-left: 10px;">Đến ngày: </b> <span>{{ productcard.endDate }}</span>
+         
+        </mat-card-subtitle>
+        <div class="d-flex align-items-center justify-content-between">
+          <div>
+            <span class="f-s-14 m-l-4 text-decoration-line-through" ></span>
+          </div>
+          <br>
+          <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center social-chips">
+              <img *ngFor="let member of productcard.members" [src]="member.urlAvatar" width="40" [alt]="member.fullName" class="rounded-circle">
+            </div>
+          </div>
+          <div class="m-l-auto d-flex gap-4">
+            <a mat-flat-button  class="m-t-10" style="background-color: #F97316; color: #ffffff;">
+              Xem thêm
+            </a>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

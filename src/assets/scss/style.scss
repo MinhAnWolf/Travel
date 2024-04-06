@@ -29,3 +29,16 @@
 
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import 'ngx-toastr/toastr';
+
+
+.ng-select .ng-select-container {
+    border: 1px solid #e4e7eb !important;
+    min-height: 52px;
+    border-radius: 7px;
+}
+
+.ng-select-custom .ng-select-container .ng-value-container .ng-placeholder{
+    margin-top: 10px;
+}
+
+

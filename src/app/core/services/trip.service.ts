@@ -13,4 +13,8 @@ export class TripService {
     return this.http.post(ApiConstant.API_GET_TIMELINE_TRIP, payload)
   }
 
+  public getListMyTrip(payload:{email: string}): Observable<any> {
+    return this.http.post(ApiConstant.API_GET_LIST_MY_TRIP, payload)
+  }
+
 }

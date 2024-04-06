@@ -1,9 +1,150 @@
 <!-- ============================================================== -->
 <!-- Simple four boxes Row -->
 <!-- ============================================================== -->
-<mat-card class="cardWithShadow">
-    <mat-card-content>
-      <mat-card-title>Setting</mat-card-title>
-      <mat-card-subtitle class="mat-body-1">This is test page</mat-card-subtitle>
-    </mat-card-content>
-  </mat-card>
+<mat-card class="mat-mdc-card mdc-card cardWithShadow">
+  <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="Tài khoản của tôi">
+          <mat-card-content class="mat-mdc-card-content p-y-24 b-t-1 ng-star-inserted">
+              <div class="row">
+
+                <!-- Cập nhật avatar -->
+                <div class="col-sm-5">
+                  <mat-card class="mat-mdc-card mdc-card cardWithShadow">
+                      <mat-card-content class=" mat-mdc-card-content p-y-24">
+                          <mat-card-title class="mat-mdc-card-title">Cập nhật ảnh đại diện</mat-card-title>
+                          <mat-card-subtitle class="mat-mdc-card-subtitle mat-body-1">Cập nhật ảnh đại diện bên dưới</mat-card-subtitle> 
+                          <div class="text-center m-t-16">
+                            <img src="/assets/images/profile/user-1.jpg" width="120" class="rounded-circle">
+                            <div class="m-t-24">
+                              <button mat-flat-button color="primary" class="m-r-8">Upload</button>
+                              <button mat-stroked-button color="warn" class="m-r-8">Reset</button>
+                            </div>
+                            <span class="f-s-14 m-t-24 d-block">Chấp nhận file JPG or PNG. Dung lượng tối đa 2MB</span>
+                          </div>
+                      </mat-card-content>
+                  </mat-card>
+                </div>
+
+                <!-- Đổi mật khẩu -->
+                <div class="col-sm-7">
+                  <mat-card class="mat-mdc-card mdc-card cardWithShadow">
+                    <mat-card-content class="mat-mdc-card-content p-y-24">
+                      <mat-card-title class="mat-mdc-card-title">Đổi mật khẩu</mat-card-title>
+                      <mat-card-subtitle class="mat-mdc-card-subtitle mat-body-1">Cập nhật mật khẩu của bạn bên dưới</mat-card-subtitle>
+
+                      <form class="m-t-30" [formGroup]="formChangePass">
+                        <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Mật khẩu hiện tại</mat-label>
+                        <mat-form-field appearance="outline" class="w-100" color="primary">
+                          <input formControlName="password" matInput type="password" placeholder="Nhập mật khẩu" />
+                        </mat-form-field>
+
+                        <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Mật khẩu mới</mat-label>
+                        <mat-form-field appearance="outline" class="w-100" color="primary">
+                          <input formControlName="newPassword" matInput type="password" placeholder="Nhập mật khẩu" />
+                        </mat-form-field>
+                        
+                        <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Xác nhận mật khẩu mới</mat-label>
+                        <mat-form-field appearance="outline" class="w-100" color="primary">
+                          <input formControlName="reNewPassword" matInput type="password" placeholder="Nhập mật khẩu" />
+                        </mat-form-field>
+              
+                        <!-- Action -->
+                        <a  mat-flat-button  class="w-100" style="background-color: #F97316; color: #ffffff;">
+                          Đổi mật khẩu
+                        </a>
+                      </form>
+                    </mat-card-content>
+                  </mat-card>
+                </div>
+
+                <!-- Thông tin cá nhân -->
+                <div class="col-sm-12">
+                  <mat-card class="mat-mdc-card mdc-card cardWithShadow">
+                    <mat-card-content class="mat-mdc-card-content p-y-24">
+                      <mat-card-title class="mat-mdc-card-title">Thông tin cá nhân</mat-card-title>
+                      <mat-card-subtitle class="mat-mdc-card-subtitle mat-body-1">Cập nhật thông tin cá nhân của bạn bên dưới</mat-card-subtitle>
+
+                      <form class="m-t-30" [formGroup]="formChangeInfo">
+                        <div class="row">
+                          <div class="col-4">
+                            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Họ và tên</mat-label>
+                            <mat-form-field appearance="outline" class="w-100" color="primary">
+                              <input formControlName="fullName" matInput type="text" placeholder="Nhập họ và tên" />
+                            </mat-form-field>
+                          </div>
+                          <div class="col-4">
+                            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Giới tính</mat-label>
+                            <mat-form-field appearance="outline" class="w-100" color="primary">
+                              <input formControlName="gender" matInput type="text" placeholder="Nhập giới tính" />
+                            </mat-form-field>
+                          </div>
+                          <div class="col-4">
+                            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Sinh nhật</mat-label>
+                            <mat-form-field appearance="outline" class="w-100" color="primary">
+                              <input formControlName="birthday" matInput type="text" placeholder="Nhập sinh nhật" />
+                            </mat-form-field>
+                          </div>
+                          <div class="col-4 m-b-16">
+                            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Tỉnh / Thành phố</mat-label>
+                            <ng-select 
+                              [items]="listProvince"
+                              [virtualScroll]="true"
+                              bindLabel="name"
+                              bindValue="id"
+                              placeholder="Chọn tỉnh / thành phố"
+                              formControlName="province" >
+                            </ng-select>
+                          </div>
+                          <div class="col-4 m-b-16">
+                            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Quận / Huyện</mat-label>
+                            <ng-select 
+                              [items]="listDistrict"
+                              [virtualScroll]="true"
+                              bindLabel="name"
+                              bindValue="id"
+                              placeholder="Chọn quận / huyện"
+                              formControlName="district" >
+                            </ng-select>
+                          </div>
+                          <div class="col-4 m-b-16">
+                            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Phường / Xã</mat-label>
+                            <ng-select 
+                              class="form-control"
+                              [items]="listWard"
+                              [virtualScroll]="true"
+                              bindLabel="name"
+                              bindValue="id"
+                              placeholder="Chọn phường / xã"
+                              formControlName="ward" >
+                            </ng-select>
+                          </div>
+                          <div class="col-4">
+                            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Email</mat-label>
+                            <mat-form-field appearance="outline" class="w-100" color="primary">
+                              <input formControlName="email" matInput type="email" placeholder="Nhập email" />
+                            </mat-form-field>
+                          </div>
+                          <div class="col-4">
+                            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Số điện thoại</mat-label>
+                            <mat-form-field appearance="outline" class="w-100" color="primary">
+                              <input formControlName="phone" matInput type="text" placeholder="Nhập số điện thoại" />
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <!-- Action -->
+                        <div mat-dialog-actions class="action">
+                          <button mat-stroked-button type="submit" style="background-color: #F97316; color: #ffffff;">Lưu</button>
+                          <button mat-stroked-button color="warn">Hủy bỏ</button>
+                        </div>
+                      </form>
+                    </mat-card-content>
+                  </mat-card>
+                </div>
+
+              </div>
+          </mat-card-content>
+      </mat-tab>
+      <mat-tab label="Thông tin hóa đơn">Thông tin hóa đơn</mat-tab>
+  </mat-tab-group>
+</mat-card>
