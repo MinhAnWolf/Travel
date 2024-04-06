@@ -18,6 +18,7 @@ import { CalendaComponent } from './calenda/calenda.component';
 import { SettingComponent } from './setting/setting.component';
 import { FriendComponent } from './friend/friend.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ReactiveFormsModule,
     TablerIconsModule.pick(TablerIcons),
     NgxSpinnerModule.forRoot(),
+    NgSelectModule
   ],
   declarations: [
     AppIconsComponent,
@@ -37,7 +39,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     MapComponent,
     CalendaComponent,
     SettingComponent,
-    FriendComponent
+    FriendComponent,
+    
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

@@ -1,9 +1,6 @@
 <h2 mat-dialog-title class="mat-mdc-dialog-title f-w-500 m-b-24" id="mat-mdc-dialog-title-1">
     Tạo chuyến đi mới
 </h2>
-  <!-- <button mat-icon-button mat-dialog-close class="close-button">
-    <mat-icon aria-label="Close">close</mat-icon>
-  </button> -->
   <div mat-dialog-content class="mat-mdc-dialog-content ng-star-inserted" style="min-width: 1400px;">
     <form  class="ng-pristine ng-invalid ng-touched">
       <div class="row">
@@ -46,24 +43,19 @@
                          placeholder="Chọn thành viên"
                          [(ngModel)]="selectedCity"
                          name="selectedCity"
-                         class="ng-select-custom"
-                         >
+                         class="ng-select-custom">
                   
-                  <ng-template ng-label-tmp let-item="item" style="height: 48px;">
-                      <img height="15" width="15" [src]="item.avatar"/>
-                      <b style="color: brown; margin-left: 10px;">{{item.name}}</b>
-                  </ng-template>
-                  <ng-template ng-option-tmp let-item="item" let-index="index">
-                      <img height="15" width="15" [src]="item.avatar"/>
-                      <b style="color: brown; margin-left: 10px;">{{item.name}}</b>
-                  </ng-template>
+                <ng-template ng-label-tmp let-item="item" style="height: 48px;">
+                    <img height="15" width="15" [src]="item.avatar"/>
+                    <b style="color: brown; margin-left: 10px;">{{item.name}}</b>
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item" let-index="index">
+                    <img height="15" width="15" [src]="item.avatar"/>
+                    <b style="color: brown; margin-left: 10px;">{{item.name}}</b>
+                </ng-template>
                  
               </ng-select>
-              <!-- <p>
-                  Selected city: {{selectedCity | json}}
-              </p> -->
           </div>
-
 
         </div>
     
@@ -93,29 +85,18 @@
           <div class="col-lg-12">
             <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Mô tả</mat-label>
             <mat-form-field appearance="outline" class="w-100 mb-15">
-              <!-- <input  placeholder="Cho tôi một tiêu đề"> -->
               <textarea matInput  rows="5"></textarea>
-              <!-- <mat-hint><strong class="required  text-danger">Đây là thông tin bắt buộc phải nhập</strong></mat-hint> -->
           </mat-form-field>
           </div>
         </div>
   
-       
-  
-  
-  
-  
       </div>
   
       <div mat-dialog-actions class="action">
-        
         <button mat-stroked-button mat-dialog-close>Hủy bỏ</button>
         <button mat-stroked-button type="submit" style="background-color: #F97316; color: #ffffff;">
           Tạo chuyến đi
         </button>
-
-
-       
       </div>
     </form>
   </div>
