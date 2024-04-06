@@ -5,6 +5,7 @@ import {AuthenticationService} from "../core/services/authentication.service";
 import {TokenModel} from "../model/token.model";
 import {BaseResponseModelModel} from "../model/base-response-model";
 import {ResponseAuthModel} from "../model/response-auth.model";
+import {ValueCommon} from "../shared/common/ValueCommon";
 
 export const AuthGuard: CanActivateFn = (route, state) => {
   let util = inject(StorageUtil)
@@ -12,9 +13,11 @@ export const AuthGuard: CanActivateFn = (route, state) => {
   const  rf = util.getCookieRf;
   const router = inject(Router);
   const authenticationService = inject(AuthenticationService);
+  const valueCommon = inject(ValueCommon);
   let result:boolean = true;
-  if (at.valueOf() == "undefined" || rf.valueOf() == "undefined" || at == "" || rf == "") {
-      router.navigate(['/authentication/login']).then(r =>
+  if (at.valueOf() == valueCommon.UNDEFINED_VALUE || rf.valueOf() == valueCommon.UNDEFINED_VALUE
+    || at == valueCommon.NULL_VALUE || rf == valueCommon.NULL_VALUE) {
+      router.navigate([valueCommon.ROUTER_LOGIN]).then(r =>
         console.log(r)
       )
      return !result;
@@ -25,7 +28,7 @@ export const AuthGuard: CanActivateFn = (route, state) => {
   tokenModel.refreshToken = rf;
   authenticationService.apiAuthenticationToken(tokenModel).subscribe(data => {
     if (data != true) {
-      router.navigate(['/authentication/login']).then(r =>
+      router.navigate([valueCommon.ROUTER_LOGIN]).then(r =>
         console.log(r)
       )
       result = false;
