@@ -74,48 +74,64 @@
                           </div>
                           <div class="col-4">
                             <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Giới tính</mat-label>
-                            <mat-form-field appearance="outline" class="w-100" color="primary">
-                              <input formControlName="gender" matInput type="text" placeholder="Nhập giới tính" />
-                            </mat-form-field>
+                              <ng-select 
+                                [items]="listGender"
+                                [virtualScroll]="true"
+                                bindLabel="name"
+                                bindValue="code"
+                                placeholder="Chọn giới tính"
+                                formControlName="gender"
+                                [clearable]="false">
+                            </ng-select>
                           </div>
                           <div class="col-4">
                             <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Sinh nhật</mat-label>
-                            <mat-form-field appearance="outline" class="w-100" color="primary">
-                              <input formControlName="birthday" matInput type="text" placeholder="Nhập sinh nhật" />
+                            <mat-form-field appearance="outline" class="w-100">
+                              <input matInput [matDatepicker]="picker" formControlName="birthday" placeholder="Chọn ngày sinh">
+                              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                              <mat-datepicker #picker></mat-datepicker>
                             </mat-form-field>
                           </div>
+                          
+                          
                           <div class="col-4 m-b-16">
                             <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Tỉnh / Thành phố</mat-label>
                             <ng-select 
                               [items]="listProvince"
                               [virtualScroll]="true"
-                              bindLabel="name"
-                              bindValue="id"
+                              bindLabel="provinceName"
+                              bindValue="provinceId"
                               placeholder="Chọn tỉnh / thành phố"
-                              formControlName="province" >
+                              formControlName="province"
+                              (change)="onProvinceChange($event)"
+                              [clearable]="false">
                             </ng-select>
+
                           </div>
                           <div class="col-4 m-b-16">
                             <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Quận / Huyện</mat-label>
                             <ng-select 
-                              [items]="listDistrict"
+                              [items]="listDistrictSelected"
                               [virtualScroll]="true"
-                              bindLabel="name"
-                              bindValue="id"
+                              bindLabel="districtName"
+                              bindValue="districtId"
                               placeholder="Chọn quận / huyện"
-                              formControlName="district" >
+                              formControlName="district"
+                              (change)="onDistrictChange($event)"
+                              [clearable]="false">
                             </ng-select>
                           </div>
                           <div class="col-4 m-b-16">
                             <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Phường / Xã</mat-label>
                             <ng-select 
                               class="form-control"
-                              [items]="listWard"
+                              [items]="listWardSelected"
                               [virtualScroll]="true"
-                              bindLabel="name"
-                              bindValue="id"
+                              bindLabel="wardName"
+                              bindValue="wardId"
                               placeholder="Chọn phường / xã"
-                              formControlName="ward" >
+                              formControlName="ward"
+                              [clearable]="false">
                             </ng-select>
                           </div>
                           <div class="col-4">
@@ -134,7 +150,7 @@
 
                         <!-- Action -->
                         <div mat-dialog-actions class="action">
-                          <button mat-stroked-button type="submit" style="background-color: #F97316; color: #ffffff;">Lưu</button>
+                          <button (click)="saveInfo()" mat-stroked-button type="submit" style="background-color: #F97316; color: #ffffff;">Lưu</button>
                           <button mat-stroked-button color="warn">Hủy bỏ</button>
                         </div>
                       </form>

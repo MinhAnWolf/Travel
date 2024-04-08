@@ -28,6 +28,8 @@ import { ToastrModule } from 'ngx-toastr';
 
 //ui custom
 import { CustomToastComponent } from './shared/ui/custom-toast/custom-toast.component';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 
 @NgModule({
   declarations: [
@@ -63,6 +65,9 @@ import { CustomToastComponent } from './shared/ui/custom-toast/custom-toast.comp
       useClass: HttpInterceptorSupport,
       multi: true
     },
+
+    { provide: MAT_DATE_LOCALE, useValue: 'vi' }, // Thiết lập ngôn ngữ
+    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } }, // Tuỳ chọn bổ sung
 
   ],
   exports: [TablerIconsModule],
