@@ -81,7 +81,7 @@ import { MomentDateModule } from '@angular/material-moment-adapter';
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
-    MomentDateModule
+    MomentDateModule,
   ],
 })
 export class MaterialModule {}
