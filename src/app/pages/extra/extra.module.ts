@@ -19,6 +19,7 @@ import { SettingComponent } from './setting/setting.component';
 import { FriendComponent } from './friend/friend.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { MyTripDetailComponent } from './my-trip/my-trip-detail/my-trip-detail.component';
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     CalendaComponent,
     SettingComponent,
     FriendComponent,
+    MyTripDetailComponent,
     
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

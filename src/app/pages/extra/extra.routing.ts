@@ -8,6 +8,7 @@ import { CalendaComponent } from './calenda/calenda.component';
 import { MessagesComponent } from './messages/messages.component';
 import { MapComponent } from './map/map.component';
 import { SettingComponent } from './setting/setting.component';
+import { MyTripDetailComponent } from './my-trip/my-trip-detail/my-trip-detail.component';
 
 export const ExtraRoutes: Routes = [
   {
@@ -24,6 +25,10 @@ export const ExtraRoutes: Routes = [
       {
         path: 'my-trip',
         component: MyTripComponent,
+      },
+      {
+        path: 'my-trip/my-trip-detail',
+        component: MyTripDetailComponent,
       },
       {
         path: 'friend',
