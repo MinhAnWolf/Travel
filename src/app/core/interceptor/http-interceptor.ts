@@ -7,6 +7,7 @@ import {ResponseAuthModel} from "../../model/response-auth.model";
 import {isNull} from "../utils/utils.util";
 import {Router} from "@angular/router";
 import { throwError } from 'rxjs';
+import {ApiConstant} from "../constant/api.constant";
 
 @Injectable()
 export class HttpInterceptorSupport implements HttpInterceptor {
@@ -16,14 +17,7 @@ export class HttpInterceptorSupport implements HttpInterceptor {
 
     // @ts-ignore
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const authToken = this.storageUtil.getCookieAt;
-        const rfToken = this.storageUtil.getCookieRf
-        const authReq = req.clone(
-          {
-            headers: req.headers.set('Authorization', authToken)
-              .set('rf', rfToken)
-          }
-        )
+      const authReq = this.handleUrl(req);
       return next.handle(authReq).pipe(
         tap(res => {
           if (res instanceof HttpResponse) {
@@ -52,6 +46,22 @@ export class HttpInterceptorSupport implements HttpInterceptor {
 
     private checkNull(at:string, rf:string):boolean {
       return at == null || at == "" || rf == null || rf == ""
+    }
+
+    private handleUrl(req: HttpRequest<any>) {
+      if (ApiConstant.ARR_IMAGE.includes(req.url)) {
+        // handle image here
+        return req;
+      } else {
+        const authToken = this.storageUtil.getCookieAt;
+        const rfToken = this.storageUtil.getCookieRf
+        return req.clone(
+          {
+            headers: req.headers.set('Authorization', authToken)
+              .set('rf', rfToken)
+          }
+        )
+      }
     }
 
 }
