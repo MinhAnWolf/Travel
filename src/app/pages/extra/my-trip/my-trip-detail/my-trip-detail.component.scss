@@ -25,4 +25,17 @@
   .custom-input:focus {
     border-color: #007bff;
   }
+
+  .custom-fieldset {
+    border: 2px solid #ccc;
+    padding: 10px;
+    border-radius: 10px; /* Adjust the value to change the level of rounding */
+  }
+  
+  .custom-legend {
+    font-weight: bold;
+    color: #333;
+    padding: 5px;
+  }
+  
   

@@ -17,4 +17,10 @@ export class TripService {
     return this.http.post(ApiConstant.API_GET_LIST_MY_TRIP, payload)
   }
 
+  public getTripDetail(payload:{c_id: string, tripId: string}): Observable<any> {
+    return this.http.post(ApiConstant.GET_TRIP_DETAIL, payload)
+  }
+
+
+
 }
