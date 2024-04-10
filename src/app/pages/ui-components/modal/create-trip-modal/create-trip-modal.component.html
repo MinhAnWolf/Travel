@@ -1,103 +1,76 @@
 <h2 mat-dialog-title class="mat-mdc-dialog-title f-w-500 m-b-24" id="mat-mdc-dialog-title-1">
-    Tạo chuyến đi mới
+  Tạo chuyến đi mới
 </h2>
-  <div mat-dialog-content class="mat-mdc-dialog-content ng-star-inserted" style="min-width: 1400px;">
-    <form  class="ng-pristine ng-invalid ng-touched">
-      <div class="row">
-        <div class="col-lg-6">
-            <div class="col-lg-12">
-                <mat-label class="mat-subtitle-2 f-w-600">Tiêu đề chuyến đi</mat-label>
-                <span class="mat-body-1 f-s-12 m-b-8 d-block">Bạn có thể thay đổi lại sau </span>
-                <mat-form-field appearance="outline" class="w-100 mb-15">
-                    <input matInput placeholder="Cho tôi một tiêu đề">
-                    <!-- <mat-hint><strong class="required  text-danger">Đây là thông tin bắt buộc phải nhập</strong></mat-hint> -->
-                </mat-form-field>
-            </div>
-
-            <div class="col-lg-12">
-                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Địa điểm bạn muốn đi</mat-label>
-                <mat-form-field appearance="outline" class="w-100 mb-15">
-                    <input matInput placeholder="Cho tôi một tiêu đề">
-                    <!-- <mat-hint><strong class="required  text-danger">Đây là thông tin bắt buộc phải nhập</strong></mat-hint> -->
-                </mat-form-field>
-            </div>
-
-            <div class="col-lg-12">
-                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Chọn thời gian</mat-label>
-                <mat-form-field appearance="outline" class="w-100">
-                    <mat-date-range-input
-                      [rangePicker]="campaignTwoPicker">
-                      <input matStartDate placeholder="Ngày bắt đầu">
-                      <input matEndDate placeholder="Ngày kết thúc">
-                    </mat-date-range-input>
-                    <mat-datepicker-toggle matIconSuffix [for]="campaignTwoPicker"></mat-datepicker-toggle>
-                    <mat-date-range-picker #campaignTwoPicker></mat-date-range-picker>
-                  </mat-form-field>             
-            </div>
-
-            <div class="col-lg-12">
-              <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Thành viên</mat-label>
-              <ng-select [items]="cities3"
-                         bindLabel="name"
-                         [multiple]="true"
-                         placeholder="Chọn thành viên"
-                         [(ngModel)]="selectedCity"
-                         name="selectedCity"
-                         class="ng-select-custom">
-                  
-                <ng-template ng-label-tmp let-item="item" style="height: 48px;">
-                    <img height="15" width="15" [src]="item.avatar"/>
-                    <b style="color: brown; margin-left: 10px;">{{item.name}}</b>
-                </ng-template>
-                <ng-template ng-option-tmp let-item="item" let-index="index">
-                    <img height="15" width="15" [src]="item.avatar"/>
-                    <b style="color: brown; margin-left: 10px;">{{item.name}}</b>
-                </ng-template>
-                 
-              </ng-select>
-          </div>
-
-        </div>
-    
-        <!-- Phải -->
-        <div class="col-lg-6">
-          <div class="col-lg-12">
-            <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Tải hình ảnh lên</mat-label>
-            <ngx-file-drag-drop
-              [formControl]="fileControl"
-              activeBorderColor="#3F51B5"
-              [multiple]="true"
-              (valueChanged)="onValueChange($event)"
-              style="max-width: 100%;"
-            >
-            </ngx-file-drag-drop>
-        
-            <div *ngIf="uploadedFiles.length > 0">
-              <div class="row">
-                <div class="col-3" *ngFor="let file of uploadedFiles">
-                  <img [src]="file.preview" width="128" height="96" style="border-radius: 10px;" />
-                </div>
-              </div>
-              
-            </div>
-          </div>
-
-          <div class="col-lg-12">
-            <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Mô tả</mat-label>
-            <mat-form-field appearance="outline" class="w-100 mb-15">
-              <textarea matInput  rows="5"></textarea>
+<div mat-dialog-content class="mat-mdc-dialog-content ng-star-inserted" style="min-width: 1400px;">
+  <form [formGroup]="form" class="ng-pristine ng-invalid ng-touched">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="col-lg-12">
+          <mat-label class="mat-subtitle-2 f-w-600">Tiêu đề chuyến đi</mat-label>
+          <span class="mat-body-1 f-s-12 m-b-8 d-block">Bạn có thể thay đổi lại sau </span>
+          <mat-form-field appearance="outline" class="w-100 mb-15">
+            <input matInput placeholder="Cho tôi một tiêu đề" formControlName="title">
           </mat-form-field>
+        </div>
+        <div class="col-lg-12 m-b-16">
+          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Địa điểm bạn muốn đi</mat-label>
+          <ng-select [items]="listAddress" [virtualScroll]="true" bindLabel="name" bindValue="code"
+            placeholder="Chọn điểm du lịch" [clearable]="false" formControlName="address">
+          </ng-select>
+        </div>
+        <div class="col-lg-12">
+          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Chọn thời gian</mat-label>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-date-range-input [rangePicker]="campaignTwoPicker">
+              <input matStartDate placeholder="Ngày bắt đầu" formControlName="startDate">
+              <input matEndDate placeholder="Ngày kết thúc" formControlName="endDate">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matIconSuffix [for]="campaignTwoPicker"></mat-datepicker-toggle>
+            <mat-date-range-picker #campaignTwoPicker></mat-date-range-picker>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-12">
+          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Thành viên</mat-label>
+          <ng-select [items]="listMyFriend" bindLabel="name" [multiple]="true" placeholder="Chọn thành viên"
+            [(ngModel)]="selectedCity" name="selectedCity" class="ng-select-custom" formControlName="members">
+            <ng-template ng-label-tmp let-item="item" style="height: 48px;">
+              <img height="15" width="15" [src]="item.avatar" />
+              <b style="color: brown; margin-left: 10px;">{{item.name}}</b>
+            </ng-template>
+            <ng-template ng-option-tmp let-item="item" let-index="index">
+              <img height="15" width="15" [src]="item.avatar" />
+              <b style="color: brown; margin-left: 10px;">{{item.name}}</b>
+            </ng-template>
+          </ng-select>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="col-lg-12">
+          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Tải hình ảnh lên</mat-label>
+          <ngx-file-drag-drop [formControl]="fileControl" activeBorderColor="#3F51B5" [multiple]="true"
+            (valueChanged)="onValueChange($event)" style="max-width: 100%;">
+          </ngx-file-drag-drop>
+          <div *ngIf="uploadedFiles.length > 0">
+            <div class="row">
+              <div class="col-3" *ngFor="let file of uploadedFiles">
+                <img [src]="file.preview" width="128" height="96" style="border-radius: 10px;" />
+              </div>
+            </div>
           </div>
         </div>
-  
+        <div class="col-lg-12">
+          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Mô tả</mat-label>
+          <mat-form-field appearance="outline" class="w-100 mb-15">
+            <textarea matInput rows="5" formControlName="desc"></textarea>
+          </mat-form-field>
+        </div>
       </div>
-  
-      <div mat-dialog-actions class="action">
-        <button mat-stroked-button mat-dialog-close>Hủy bỏ</button>
-        <button mat-stroked-button type="submit" style="background-color: #F97316; color: #ffffff;">
-          Tạo chuyến đi
-        </button>
-      </div>
-    </form>
-  </div>
-  
+    </div>
+    <div mat-dialog-actions class="action">
+      <button mat-stroked-button mat-dialog-close>Hủy bỏ</button>
+      <button mat-stroked-button type="submit" style="background-color: #F97316; color: #ffffff;" (click)="create()">
+        Tạo chuyến đi
+      </button>
+    </div>
+  </form>
+</div>

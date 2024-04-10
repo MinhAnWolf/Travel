@@ -20,6 +20,9 @@ import { FriendComponent } from './friend/friend.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MyTripDetailComponent } from './my-trip/my-trip-detail/my-trip-detail.component';
+import { GalleryModule } from 'ng-gallery';
+import { LightboxModule } from 'ng-gallery/lightbox';
+
 
 @NgModule({
   imports: [
@@ -30,7 +33,9 @@ import { MyTripDetailComponent } from './my-trip/my-trip-detail/my-trip-detail.c
     ReactiveFormsModule,
     TablerIconsModule.pick(TablerIcons),
     NgxSpinnerModule.forRoot(),
-    NgSelectModule
+    NgSelectModule,
+    GalleryModule,
+    LightboxModule
   ],
   declarations: [
     AppIconsComponent,
