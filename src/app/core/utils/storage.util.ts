@@ -24,10 +24,10 @@ export class StorageUtil{
   }
 
   public setCookieOnly(key:string, value:any) {
-    this.cookieService.set(key, value, undefined, "/", undefined, true, 'Strict')
+    this.cookieService.set(key, value, undefined, "/", undefined, false, 'Strict')
   }
 
   public setCookie(key:string, value:any) {
-    this.cookieService.set(key, value, undefined, "/", undefined, true, 'Strict')
+    this.cookieService.set(key, value, undefined, "/", undefined, false, 'Strict')
   }
 }

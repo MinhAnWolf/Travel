@@ -31,7 +31,6 @@ export class AppSideLoginComponent {
         this.storageUtil.setCookie("c_id", response.uid)
         this.router.navigate(['/dashboard']);
       }
-
     })
   }
 
