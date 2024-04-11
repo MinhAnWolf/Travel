@@ -1,100 +1,96 @@
 <mat-card class="cardWithShadow">
     <mat-card-content>
-        <fieldset>
-            <legend>Thông tin chung</legend>
-            <form class="ng-pristine ng-invalid ng-touched">
+        <mat-card-title>Thông tin chung</mat-card-title>
+            <hr class="m-b-12">
+            
                 <div class="row">
                     <div class="col-6">
+                        <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Một vài hình ảnh</mat-label>
+                        <gallery id="basic-test" imageSize="cover" fluid [items]="items"></gallery>
 
+                        <div class="text-center m-t-16">
+                            <a href="javascript:" class="text-primary text-decoration-none mat-body-1" (click)="lightbox.open(0, 'lightbox', {panelClass: 'fullscreen'})">
+                                Chi tiết ảnh
+                            </a>
+                        </div>
                     </div>
                     <div class="col-6">
-
-                        <div class="col-lg-12">
-                            <mat-label class="mat-subtitle-2 f-w-600">Tiêu đề chuyến đi</mat-label>
-                            <mat-form-field appearance="outline" class="w-100 mb-15">
-                                <input matInput placeholder="Cho tôi một tiêu đề">
-                                <mat-icon matPrefix>
-                                    <i-tabler class="routeIcon" name="home" matListItemIcon></i-tabler></mat-icon>
-                            </mat-form-field>
-                        </div>
-
-                        <div class="col-lg-12">
-                            <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Địa điểm bạn muốn đi</mat-label>
-                            <mat-form-field appearance="outline" class="w-100 mb-15">
-                                <input matInput placeholder="Cho tôi một tiêu đề">
-                                <mat-icon matPrefix>
-                                    <i-tabler class="routeIcon" name="home" matListItemIcon></i-tabler></mat-icon>
-                            </mat-form-field>
-                        </div>
-
-                        <div class="col-lg-12">
-                            <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Chọn thời gian</mat-label>
-                            <mat-form-field appearance="outline" class="w-100">
-                                <mat-date-range-input [rangePicker]="campaignTwoPicker">
-                                    <input matStartDate placeholder="Ngày bắt đầu">
-                                    <input matEndDate placeholder="Ngày kết thúc">
-                                </mat-date-range-input>
-                                <mat-datepicker-toggle matIconSuffix [for]="campaignTwoPicker"></mat-datepicker-toggle>
-                                <mat-date-range-picker #campaignTwoPicker></mat-date-range-picker>
-
-                                <mat-icon matPrefix>
-                                    <i-tabler class="routeIcon" name="home" matListItemIcon></i-tabler></mat-icon>
-                            </mat-form-field>
-                        </div>
-
-                        <div class="col-lg-12">
-                            <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Tỉnh / Thành phố</mat-label>
-                            <mat-form-field appearance="outline" class="w-100 mb-15">
-                                <input matInput placeholder="Cho tôi một tiêu đề">
-                                <mat-icon matPrefix>
-                                    <i-tabler class="routeIcon" name="home" matListItemIcon></i-tabler></mat-icon>
-                            </mat-form-field>
-                        </div>
-
-                        <div class="col-lg-12">
-                            <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Thành viên</mat-label>
-                            <ng-select [items]="cities3" bindLabel="name" [multiple]="true"
-                                placeholder="Chọn thành viên" [(ngModel)]="selectedCity" name="selectedCity"
-                                class="ng-select-custom">
-
-                                <ng-template ng-label-tmp let-item="item" style="height: 48px;">
-                                    <img height="15" width="15" [src]="item.avatar" />
-                                    <b style="color: brown; margin-left: 10px;">{{item.name}}</b>
-                                </ng-template>
-                                <ng-template ng-option-tmp let-item="item" let-index="index">
-                                    <img height="15" width="15" [src]="item.avatar" />
-                                    <b style="color: brown; margin-left: 10px;">{{item.name}}</b>
-                                </ng-template>
-
-                            </ng-select>
-                        </div>
-
-                        <div class="col-lg-12">
-                            <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Quận / Huyện</mat-label>
-                            <mat-form-field appearance="outline" class="w-100 mb-15">
-                                <input matInput placeholder="Cho tôi một tiêu đề">
-                                <mat-icon matPrefix>
-                                    <i-tabler class="routeIcon" name="home" matListItemIcon></i-tabler></mat-icon>
-                            </mat-form-field>
-                        </div>
-
-                        <div class="col-lg-12 m-t-12">
-                            <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Mô tả</mat-label>
-                            <mat-form-field appearance="outline" class="w-100 mb-15">
-                                <textarea matInput rows="5"></textarea>
-                                <mat-icon matPrefix>
-                                    <i-tabler class="routeIcon" name="home" matListItemIcon></i-tabler></mat-icon>
-                            </mat-form-field>
-                        </div>
-
-
+                        <form class="ng-pristine ng-invalid ng-touched" [formGroup]="form">
+                            <div class="col-lg-12">
+                                <mat-label class="mat-subtitle-2 f-w-600">Tiêu đề chuyến đi</mat-label>
+                                <mat-form-field appearance="outline" class="w-100 mb-15">
+                                    <input formControlName="title" matInput placeholder="Cho tôi một tiêu đề">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-lg-12 m-b-16">
+                                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Địa điểm bạn muốn đi</mat-label>
+                                <ng-select [items]="listTouristAttractions" [virtualScroll]="true" bindLabel="name" bindValue="code"
+                                    placeholder="Chọn điểm du lịch" formControlName="touristAttraction" [clearable]="false">
+                                </ng-select>
+                               
+                            </div>
+                            <div class="col-lg-12">
+                                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Chọn thời gian</mat-label>
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-date-range-input [rangePicker]="campaignTwoPicker">
+                                        <input formControlName="startDate" matStartDate placeholder="Ngày bắt đầu">
+                                        <input formControlName="endDate" matEndDate placeholder="Ngày kết thúc">
+                                    </mat-date-range-input>
+                                    <mat-datepicker-toggle matIconSuffix [for]="campaignTwoPicker"></mat-datepicker-toggle>
+                                    <mat-date-range-picker #campaignTwoPicker></mat-date-range-picker>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-lg-12">
+                                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Tỉnh / Thành phố</mat-label>
+                                <ng-select 
+                                    [items]="listProvince"
+                                    [virtualScroll]="true"
+                                    bindLabel="provinceName"
+                                    bindValue="provinceId"
+                                    placeholder="Chọn tỉnh / thành phố"
+                                    formControlName="province"
+                                    (change)="onProvinceChange($event)"
+                                    [clearable]="false">
+                                </ng-select>
+                            </div>
+                            <div class="col-lg-12 m-t-16">
+                                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Quận / Huyện</mat-label>
+                                <ng-select 
+                                    [items]="listDistrictSelected"
+                                    [virtualScroll]="true"
+                                    bindLabel="districtName"
+                                    bindValue="districtId"
+                                    placeholder="Chọn Quận / Huyện"
+                                    formControlName="district"
+                                    [clearable]="false">
+                                </ng-select>
+                            </div>
+                            <div class="col-lg-12 m-t-16">
+                                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Thành viên</mat-label>
+                                <ng-select [items]="listMember" bindLabel="name" bindValue="id" [multiple]="true"
+                                    placeholder="Chọn thành viên" formControlName="members" name="members" class="ng-select-custom">
+                                    <ng-template ng-label-tmp let-item="item" style="height: 48px;">
+                                        <img height="15" width="15" [src]="item.avatar" />
+                                        <b style="color: brown; margin-left: 10px;">{{item.name}}</b>
+                                    </ng-template>
+                                    <ng-template ng-option-tmp let-item="item" let-index="index">
+                                        <img height="15" width="15" [src]="item.avatar" />
+                                        <b style="color: brown; margin-left: 10px;">{{item.name}}</b>
+                                    </ng-template>
+                                </ng-select>
+                            </div>
+                            
+                            <div class="col-lg-12 m-t-12">
+                                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Mô tả</mat-label>
+                                <mat-form-field appearance="outline" class="w-100 mb-15">
+                                    <textarea matInput rows="5" formControlName="desc"></textarea>
+                                </mat-form-field>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </form>
-        </fieldset>
-
-        <fieldset>
-            <legend>Lịch trình</legend>
+            <mat-card-title>Lịch trình cho chuyến đi</mat-card-title>
+            <hr class="m-b-12">
             <div class="row">
                 <div class="col-lg-3">
                     <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Mốc thời gian</mat-label>
@@ -118,29 +114,31 @@
                         (click)="addNewItem()">Thêm</button>
                 </div>
             </div>
-
             <div class="table-responsive">
                 <table class="table">
-                    <!-- Column headers -->
                     <thead>
                         <tr>
-                            <th>Mốc thời gian</th>
-                            <th>Điểm du lịch</th>
-                            <th>Vị trí Google Map</th>
-                            <th>Hành động</th>
+                            <th style="width: 20%">Mốc thời gian</th>
+                            <th style="width: 40%">Điểm du lịch</th>
+                            <th style="width: 30%">Vị trí Google Map</th>
+                            <th style="width: 10%">Hành động</th>
                         </tr>
                     </thead>
-                    <!-- Table data -->
                     <tbody>
                         <tr *ngFor="let item of tableData; let i = index">
-                            <td>{{ item.time | date:'dd/MM/yyyy' }}</td>
+                            <td>{{ item.time | date:'dd/MM/yyyy HH:mm' }}</td>
                             <td>{{ item.touristAttractions }}</td>
                             <td>{{ item.urlGoogleMap }}</td>
-                            <td><button class="delete-button" (click)="removeItem(i)">Xóa</button></td>
+                            <td>
+                                <button mat-stroked-button type="submit"
+                                        style="background-color: #F97316; color: #ffffff; width: 100%;"
+                                        (click)="removeItem(i)">
+                                    Xóa
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-        </fieldset>
     </mat-card-content>
 </mat-card>
