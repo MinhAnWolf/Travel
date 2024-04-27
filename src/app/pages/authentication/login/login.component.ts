@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserModel} from "../../../model/auth.model";
 import {AuthenticationService} from "../../../core/services/authentication.service";
 import {ResponseAuthModel} from "../../../model/response-auth.model";
 import {StorageUtil} from "../../../core/utils/storage.util";
 import {Router} from "@angular/router";
 import {CookieService} from "ngx-cookie-service";
+import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -13,32 +15,53 @@ import {CookieService} from "ngx-cookie-service";
   providers: [CookieService]
 })
 export class AppSideLoginComponent {
-  loginForm:FormGroup
-  constructor(private auth: AuthenticationService,
-              private storageUtil: StorageUtil,
-              private router: Router) {
-    this.init();
+
+  hide = true;
+  email: FormControl;
+  password: FormControl;
+
+  constructor(
+    private router: Router,
+    private auth: AuthenticationService,
+    private toast: ToastrService,
+    private spinner: NgxSpinnerService,
+    private storageUtil: StorageUtil
+  ) {
+    this.initForm();
   }
 
+  loginForm:FormGroup
+
+  get f() {
+    return this.loginForm.controls;
+  }
+
+
   login() {
+    this.spinner.show();
     let user: UserModel = <UserModel> this.loginForm.value
     this.auth.apiLogin(user).subscribe(data => {
       if (data != null) {
+        this.spinner.hide();
         let response:ResponseAuthModel = <ResponseAuthModel> data;
-        console.log(response)
         this.storageUtil.setCookie("Authorization", response.token)
         this.storageUtil.setCookieOnly("rf", "Bearer " + response.rf)
         this.storageUtil.setCookie("c_id", response.uid)
         this.router.navigate(['/dashboard']);
       }
+    }, error => {
+      this.toast.error('Tài khoản hoặc mật khẩu không đúng');
+      this.spinner.hide();
     })
   }
 
-  private init() {
+  initForm() {
     this.loginForm = new FormGroup({
-      username: new FormControl(),
-      password: new FormControl(),
+      // email: new FormControl('', [Validators.required, Validators.email]),
+      username: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
       remember: new FormControl()
     });
   }
+  
 }

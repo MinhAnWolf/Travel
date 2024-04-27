@@ -30,6 +30,8 @@
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import 'ngx-toastr/toastr';
 
+@import "src/assets/scss/variables";
+
 
 .ng-select .ng-select-container {
     border: 1px solid #e4e7eb !important;
@@ -43,4 +45,109 @@
 
 .ng-select.ng-select-single .ng-select-container .ng-value-container .ng-input {
     margin-top: 10px;
+}
+
+.mdc-text-field--disabled {
+    background-color: #f9f9f9;
+}
+
+.mdc-text-field--outlined.mdc-text-field--disabled .mdc-text-field__input {
+    color: light-dark(rgb(56, 56, 56), rgb(145, 145, 145)) !important;
+}
+
+.mat-date-range-input-inner[disabled] {
+    color: light-dark(rgb(56, 56, 56), rgb(145, 145, 145)) !important;
+}
+
+
+// Width - Height - Index
+.w-15 {width: 15%}
+.w-30 {width: 30%}
+.w-100 {width: 100%}
+.h-50 {height: 50%}
+.h-100 {height: 100%}
+.z-index-100 {z-index: 100}
+
+// Float
+.fl-left {float: left}
+.fl-right {float: right}
+
+// Margin
+.mt-2 {margin-top: 2px}
+.mt-5 {margin-top: 5px}
+.mr-5 {margin-right: 5px}
+.mr-10 {margin-right: 10px}
+.mb-5 {margin-bottom: 5px}
+.ml-5 {margin-left: 5px}
+.mt-10 {margin-top: 10px}
+.mt-15 {margin-top: 15px}
+.mr-10 {margin-right: 10px}
+.mb-10 {margin-bottom: 10px}
+.mb-15 {margin-bottom: 15px}
+.mb-20 {margin-bottom: 20px}
+.mb-25 {margin-bottom: 25px}
+.ml-10 {margin-left: 10px}
+.ml-15 {margin-left: 15px}
+
+// Font
+.f-s-8 { font-size: 8px }
+
+// Padding
+.p-none { padding: 0}
+.p-5 {padding: 5px}
+.p-10 {padding: 10px}
+.p-20 {padding: 20px}
+.p-0-20 {padding: 0 20px}
+.p-20-40 {padding: 20px 40px}
+.p-40-20 {padding: 40px 20px}
+.p-100-60 {padding: 100px 60px}
+.pt-15 {padding-top: 15px}
+.pt-20 {padding-top: 20px}
+.pl-15 {padding-left: 15px}
+.pr-none {padding-right: 0}
+.pr-5 {padding-right: 5px}
+.pr-15 {padding-right: 15px}
+.pb-15 {padding-bottom: 15px}
+
+// Position
+.pos-relative {position: relative}
+.pos-absolute {position: absolute}
+
+// Display
+.dis-block { display: block }
+.overflow-hidden {overflow: hidden}
+
+// Ratio
+.ratio-1x1 {@extend .w-100; position: relative; padding-top: 100%}
+.ratio-1x2 {@extend .w-100; position: relative; padding-top: calc(100% * 2)}
+.ratio-4x3 {@extend .ratio-1x2; padding-top: calc(100% * (3/4))}
+.ratio-16x9 {@extend .ratio-4x3; padding-top: calc(100% * (9/16))}
+.ratio-21x6 {@extend .ratio-16x9; padding-top: calc(100% * (6/21))}
+.ratio-21x9 {@extend .ratio-16x9; padding-top: calc(100% * (9/21))}
+
+// Content
+.content {@extend .w-100; @extend .h-100; position: absolute; top: 0; left: 0;}
+.content-center {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);}
+.radio { padding-top: 8px }
+.title { margin-bottom: 30px; }
+// .title-hr { padding-bottom: 3px; border-bottom: 1px solid $hr-color }
+.title-hr-3 { margin-bottom: -6px }
+.hr-progress { margin-top: -21.5px }
+// .action { @extend .w-100; border-top: 1px solid $hr-color; padding-top: 10px; margin-top: 20px }
+.field-title { margin-top: 10px; margin-bottom: 0; }
+.required { margin-left: 15px; margin-top: -6px; font-size: 8pt; font-weight: bold; color: #ffae1f; }
+.field-icon { font-size: 14pt; margin-top: -8px; }
+
+.choose-avatar { border: 1px solid black; @extend .pos-relative; @extend .overflow-hidden}
+.title-choose-avatar { @extend .pos-absolute; top: 50%; text-align: center}
+
+.customizerBtn {
+  position: fixed;
+  right: 40px;
+  bottom: 90px;
+  z-index: 9;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
 }
