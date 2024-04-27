@@ -1,87 +1,66 @@
-<div class="flex-layout">
-  <div class="row justify-content-center align-items-center" style="height: 100vh; width: 100%;">
-    <div class="col-lg-9 image-container">
-      <img src="/assets/images/backgrounds/Rectangle.png" alt="" style="width: 100%; height: 100vh;">
-    </div>
-    <div class="col-lg-3">
-      <div class="justify-content-center">
-        <div class="text-left">
-          <a [routerLink]="['/dashboard']" style="position: relative; display: inline-block;">
-            <img
-              src="./assets/images/logos/logo.png"
-              class="align-middle m-2"
-              alt="logo"
-              width="60px"
-              height="44px"
-            />
-            <span style="position: absolute; top: 10px; left: 80px; font-size: 20px;  font-weight: bold;color: #EF7A6F;">Waker</span>
-          </a>
-          <h2>Rất vui được gặp bạn</h2>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "large" color = "#fff" type = "ball-clip-rotate" [fullScreen] = "true"><p style="color: white" > Chờ tớ xíu... </p></ngx-spinner>
+<div class="blank-layout-container justify-content-center">
+  <div class="position-relative row w-100 h-100">
+    <div class="col-lg-7 col-xl-8 bg-gredient p-0">
+      <div class="p-24 h-100">
+        <a href="/dashboards/dashboard1" class="ng-star-inserted">
+          <img src="./assets/images/logos/logo.png" alt="logo" class="align-middle" style="width: 120x; height: 30px;">
+        </a>
+        <div class="align-items-center justify-content-center img-height d-none d-lg-flex">
+          <img src="/assets/images/vector/traveling-1.png" alt="login" style="max-width: 500px;">
         </div>
-
-
-
-        <form class="m-t-30" [formGroup]="loginForm">
-          <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
-            >Email</mat-label>
-          <mat-form-field appearance="outline" class="w-100" color="primary">
-            <input formControlName="username" matInput  placeholder="Nhập email của bạn"/>
-          </mat-form-field>
-          <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
-            >Mật khẩu</mat-label>
-          <mat-form-field appearance="outline" class="w-100" color="primary">
-            <input formControlName="password" matInput type="password" placeholder="Nhập mật khẩu" />
-          </mat-form-field>
-
-          <div class="d-flex align-items-center m-b-12">
-            <mat-checkbox formControlName="remember" color="primary">Ghi nhớ thiết bị</mat-checkbox>
-            <a
-              [routerLink]="['/']"
-              class="text-primary f-w-600 text-decoration-none m-l-auto f-s-14"
-              >Quên mật khẩu?</a
-            >
-          </div>
-          <a (click)="login()" mat-flat-button  class="w-100" style="background-color: #F97316; color: #ffffff;">
-            Đăng nhập
-          </a>
-        </form>
-
-        <div class="or-border m-t-30">Hoặc đăng nhập bằng</div>
-
-        <div class="row m-t-24 custom-row">
-          <div class="col-12 col-sm-12">
-            <button mat-stroked-button class="w-100">
-              <div class="d-flex align-items-center">
-                <img
-                  src="/assets/images/svgs/google-icon.svg"
-                  alt="google"
-                  width="16"
-                  class="m-r-8"
-                />
-                Đăng nhập bằng Gmail
-              </div>
-            </button>
-          </div>
-
-        </div>
-
-
-        <span class="d-block f-w-500 text-center m-t-24"
-              >Bạn chưa có tài khoản?
-              <a
-                [routerLink]="['/authentication/register']"
-                class="text-decoration-none text-primary f-w-500 f-s-14"
-              >
-                Đăng ký</a
-              >
-            </span>
-
       </div>
+    </div>
+    <div class="col-lg-5 col-xl-4 p-0">
+      <div class="p-32 d-flex align-items-start align-items-lg-center justify-content-center h-100">
+        <div class="row justify-content-center w-100">
+          <div class="col-lg-9 max-width-form">
+            <h4 class="text-center f-w-700 f-s-24 m-0">Đăng nhập</h4>
+            <span class="text-center f-s-14 d-block mat-body-1 m-t-8">Xin chào, vui lòng nhập thông tin đăng nhập</span>
+       
+            <form class="m-t-30" [formGroup]="loginForm" (ngSubmit)="login()">
+              <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Email</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary" style="margin-bottom: 10px">
+                <input matInput placeholder="Nhập Email" formControlName="username">
+                <mat-error *ngIf="loginForm?.get('username')?.hasError('required')">Vui lòng nhập Email</mat-error>
+                <!-- <mat-error *ngIf="loginForm?.get('email')?.hasError('email')">Email không hợp lệ</mat-error> -->
+              </mat-form-field>
+                          
+              <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Mật khẩu</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary" style="margin-bottom: 10px">
+                <input matInput type="password" placeholder="Nhập mật khẩu" formControlName="password">
+                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                <mat-error *ngIf="loginForm?.get('password')?.hasError('required')">Vui lòng nhập mật khẩu</mat-error>
+              </mat-form-field>
+            
+              <div class="d-flex align-items-center m-b-12">
+                <i-tabler class="routeIcon" name="headset" matListItemIcon></i-tabler> 
+                <a class="text-primary f-w-600 text-decoration-none m-l-6 f-s-14" href="tel:0559934078">055.993.4078</a>
+                <a [routerLink]="['/']" class="text-primary f-w-600 text-decoration-none m-l-auto f-s-14">Quên mật khẩu ?</a>
+              </div>
+              
+              <button mat-flat-button color="primary" class="w-100" type="submit" style="background-color: #F97316; color: #ffffff;">Đăng nhập</button>
+            </form>
+            <div class="or-border m-t-30 m-b-30">hoặc tiếp tục bằng</div>
 
+            <button mat-button-ripple-uninitialized="" mat-stroked-button="" class="w-100 mdc-button mdc-button--outlined mat-mdc-outlined-button mat-unthemed mat-mdc-button-base" mat-button-is-fab="false">
+              <span class="mdc-button__label">
+                <div class="d-flex align-items-center">
+                  <img src="/assets/images/svgs/google-icon.svg" alt="google" width="16" class="m-r-8"> Đăng nhập bằng Google
+                 </div>
+              </span>
+            </button>
 
+          <span class="d-block f-w-500 text-center m-t-24">
+            Chưa có tài khoản? 
+            <a [routerLink]="['/auth/register']" class="text-decoration-none text-primary f-w-500 f-s-14 p-x-12">
+              Đăng ký ngay
+            </a>
+          </span>
 
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
-

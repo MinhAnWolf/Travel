@@ -25,6 +25,8 @@ export class MyTripDetailComponent implements OnInit{
   }
 
   form: FormGroup;
+  editMode: boolean = false;
+    originalFormValue: any;
 
   ngOnInit() {
 
@@ -113,18 +115,46 @@ export class MyTripDetailComponent implements OnInit{
 
 
 
-  private initForm() {
+  initForm() {
     this.form = new FormGroup({
-      title: new FormControl(),
-      touristAttraction: new FormControl(),
-      startDate: new FormControl(),
-      endDate: new FormControl(),
-      province: new FormControl(),
-      district: new FormControl(),
-      members: new FormControl(),
-      desc: new FormControl(),
+        title: new FormControl({value: null, disabled: true}),
+        touristAttraction: new FormControl({value: null, disabled: true}),
+        startDate: new FormControl({value: null, disabled: true}),
+        endDate: new FormControl({value: null, disabled: true}),
+        province: new FormControl({value: null, disabled: true}),
+        district: new FormControl({value: null, disabled: true}),
+        members: new FormControl({value: null, disabled: true}),
+        desc: new FormControl({value: null, disabled: true}),
     });
-  }
+}
+
+onEdit() {
+    this.editMode = true;
+    this.originalFormValue = this.form.value;
+    // Enable form for editing
+    this.form.enable();
+}
+
+onSave() {
+    const json = {
+      ...this.form.value,
+      ...{timeline : this.tableData}
+    }
+    console.log(json)
+
+    this.editMode = false;
+    // Disable form after saving
+    this.form.disable();
+}
+
+onCancel() {
+    this.editMode = false;
+    // Reset form value to original value
+    this.form.patchValue(this.originalFormValue);
+    // Disable form after cancelling
+    this.form.disable();
+}
+
 
   getTripDetail() {
     const payload = {

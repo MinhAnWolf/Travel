@@ -106,23 +106,23 @@ export class CreateTripModalComponent implements OnInit {
     console.log(this.uploadedFiles);
   
     // Lặp qua từng hình ảnh trong uploadedFiles
-    for (const uploadedFile of this.uploadedFiles) {
-      try {
-        const base64Data: string = await this.blobToBase64(uploadedFile.preview);
-        console.log('Base64 data:', base64Data);
-        // Gọi phương thức upload() của ImgurApiService và truyền dữ liệu base64 vào
-        this.imgurApiService.upload(base64Data).subscribe(
-          (response) => {
-            console.log('Upload successful:', response);
-          },
-          (error) => {
-            console.error('Error uploading image to Imgur:', error);
-          }
-        );
-      } catch (error) {
-        console.error('Error converting blob to base64:', error);
-      }
-    }
+    // for (const uploadedFile of this.uploadedFiles) {
+    //   try {
+    //     const base64Data: string = await this.blobToBase64(uploadedFile.preview);
+    //     console.log('Base64 data:', base64Data);
+    //     // Gọi phương thức upload() của ImgurApiService và truyền dữ liệu base64 vào
+    //     this.imgurApiService.upload(base64Data).subscribe(
+    //       (response) => {
+    //         console.log('Upload successful:', response);
+    //       },
+    //       (error) => {
+    //         console.error('Error uploading image to Imgur:', error);
+    //       }
+    //     );
+    //   } catch (error) {
+    //     console.error('Error converting blob to base64:', error);
+    //   }
+    // }
   }
   
   
