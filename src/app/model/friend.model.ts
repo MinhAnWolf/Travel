@@ -1,5 +1,5 @@
 export class MyFriendResponse {
-    id: string;
+    idUser: string;
     fullName: string;
     email: string;
     urlAvatar?: string;
@@ -7,7 +7,7 @@ export class MyFriendResponse {
 
 
 export class FriendRequestResponse {
-    id: string;
+    idUser: string;
     fullName: string;
     email: string;
     urlAvatar?: string;

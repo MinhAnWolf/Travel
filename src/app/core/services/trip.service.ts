@@ -7,7 +7,9 @@ import { GetTimelineTripRequestModel } from "src/app/model/get-timeline-trip-req
 @Injectable({ providedIn: 'root' })
 export class TripService {
 
-  constructor(private http:HttpClient) {}
+  constructor(
+    private http:HttpClient
+  ) {}
 
   public getTimelineTrip(payload:GetTimelineTripRequestModel): Observable<any> {
     return this.http.post(ApiConstant.API_GET_TIMELINE_TRIP, payload)
@@ -21,6 +23,9 @@ export class TripService {
     return this.http.post(ApiConstant.GET_TRIP_DETAIL, payload)
   }
 
+  public createTrip(payload:any): Observable<any> {
+    return this.http.post(ApiConstant.API_CREATE_TRIP, payload)
+  }
 
 
 }
