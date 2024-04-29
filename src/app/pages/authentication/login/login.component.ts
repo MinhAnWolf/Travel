@@ -44,7 +44,7 @@ export class AppSideLoginComponent {
       if (data != null) {
         this.spinner.hide();
         let response:ResponseAuthModel = <ResponseAuthModel> data;
-        this.storageUtil.setCookie("Authorization", response.token)
+        this.storageUtil.setCookie("Authorization", "Bearer " + response.token)
         this.storageUtil.setCookieOnly("rf", "Bearer " + response.rf)
         this.storageUtil.setCookie("c_id", response.uid)
         this.router.navigate(['/dashboard']);
@@ -63,5 +63,5 @@ export class AppSideLoginComponent {
       remember: new FormControl()
     });
   }
-  
+
 }
