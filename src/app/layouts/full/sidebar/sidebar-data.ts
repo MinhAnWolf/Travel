@@ -40,7 +40,17 @@ export const navItems: NavItem[] = [
     route: '/extra/setting',
   },
   {
+    displayName: 'Travel guide',
+    iconName: 'map-pin-search',
+    route: '/extra/travel-guide',
+  },
+  {
     navCap: 'Ui Components',
+  },
+    {
+    displayName: 'Icons',
+    iconName: 'mood-smile',
+    route: '/extra/icons',
   },
   {
     displayName: 'Badge',

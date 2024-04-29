@@ -5,13 +5,16 @@ import { FileValidators } from 'ngx-file-drag-drop';
 import { AddressService } from 'src/app/core/services/address.service';
 import { FriendService } from 'src/app/core/services/friend.service';
 import { ImgurApiService } from 'src/app/core/services/imgur-api.service';
+import { TripService } from 'src/app/core/services/trip.service';
+import { UploadDriveService } from 'src/app/core/services/upload-drive.service';
 import { MyFriendResponse } from 'src/app/model/friend.model';
+import { UploadDriveResponse } from 'src/app/model/upload-drive.models';
 
 @Component({
   selector: 'app-create-trip-modal',
   templateUrl: './create-trip-modal.component.html',
   styleUrls: ['./create-trip-modal.component.scss'],
-  providers: [provideNativeDateAdapter(), ImgurApiService],
+  providers: [provideNativeDateAdapter(), ImgurApiService, UploadDriveService],
 })
 export class CreateTripModalComponent implements OnInit {
   form: FormGroup;
@@ -19,6 +22,7 @@ export class CreateTripModalComponent implements OnInit {
   uploadedFiles: { file: File, preview: string }[] = [];
   selectedCity: any;
   listAddress: any;
+  listImage: any = [];
   fileControl = new FormControl();
 
 
@@ -26,7 +30,9 @@ export class CreateTripModalComponent implements OnInit {
     private formBuilder: FormBuilder,
     private friendService: FriendService,
     private addressService: AddressService,
-    private imgurApiService: ImgurApiService
+    private imgurApiService: ImgurApiService,
+    private tripService: TripService,
+    private uploadDriveService: UploadDriveService
   ) {}
 
   ngOnInit(): void {
@@ -43,7 +49,7 @@ export class CreateTripModalComponent implements OnInit {
       endDate: [''],
       members: [''],
       images: [''],
-      desc: [''],
+      description: [''],
     });
   }
 
@@ -65,7 +71,7 @@ export class CreateTripModalComponent implements OnInit {
     this.friendService.getMyFriend(payload).subscribe( 
       (res) => {
         this.listMyFriend = res.data.map((friend: any) => ({
-          id: friend.id,
+          idUser: friend.idUser,
           name: friend.fullName,
           avatar: friend.urlAvatar
         }));
@@ -102,27 +108,67 @@ export class CreateTripModalComponent implements OnInit {
   }
 
   async create() {
-    console.log(this.form.value);
-    console.log(this.uploadedFiles);
+    try {
+      // Mảng chứa các promise cho việc tải lên hình ảnh
+      const uploadPromises = [];
   
-    // Lặp qua từng hình ảnh trong uploadedFiles
-    // for (const uploadedFile of this.uploadedFiles) {
-    //   try {
-    //     const base64Data: string = await this.blobToBase64(uploadedFile.preview);
-    //     console.log('Base64 data:', base64Data);
-    //     // Gọi phương thức upload() của ImgurApiService và truyền dữ liệu base64 vào
-    //     this.imgurApiService.upload(base64Data).subscribe(
-    //       (response) => {
-    //         console.log('Upload successful:', response);
-    //       },
-    //       (error) => {
-    //         console.error('Error uploading image to Imgur:', error);
-    //       }
-    //     );
-    //   } catch (error) {
-    //     console.error('Error converting blob to base64:', error);
-    //   }
-    // }
+      // Lặp qua từng hình ảnh trong uploadedFiles
+      for (const uploadedFile of this.uploadedFiles) {
+        const base64Data: string = await this.blobToBase64(uploadedFile.preview);
+        const base64DataOnly = base64Data.split(',')[1];
+        
+        // Thêm promise cho việc tải lên hình ảnh vào mảng
+        uploadPromises.push(
+          new Promise<void>((resolve, reject) => {
+            this.uploadDriveService.upload(base64DataOnly).subscribe((res: any) => {
+              const itemImage = {
+                linkImage : res.link
+              }
+              this.listImage.push(itemImage);
+              resolve();
+            }, error => {
+              reject(error);
+            });
+          })
+        );
+      }
+  
+      // Chờ tất cả các promise tải lên hoàn thành
+      await Promise.all(uploadPromises);
+  
+      // Sau khi tất cả các hình ảnh được tải lên, tiến hành tạo chuyến đi
+      const payload = {
+        title : this.form.value?.title,
+        address: this.form.value?.address,
+        startDate: this.formatDate(this.form.value.startDate),
+        endDate: this.formatDate(this.form.value.endDate),
+        description : this.form.value?.description,
+        images : this.listImage,
+        members : this.form.value?.members
+      };
+  
+      console.log(payload);
+  
+      // Gọi hàm createTrip sau khi tải lên hình ảnh hoàn tất
+      this.tripService.createTrip(payload).subscribe(res => {
+        console.log(res);
+      });
+    } catch (error) {
+      console.error('Error creating trip:', error);
+    }
+  }
+  
+
+
+  // Function to format the date to yyyy-mm-dd format
+  formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    return `${date.getFullYear()}-${this.padZero(date.getMonth() + 1)}-${this.padZero(date.getDate())}`;
+  }
+
+  // Function to add zero padding if needed
+  padZero(num: number): string {
+    return num < 10 ? '0' + num : num.toString();
   }
   
   

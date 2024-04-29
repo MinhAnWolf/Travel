@@ -22,6 +22,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { MyTripDetailComponent } from './my-trip/my-trip-detail/my-trip-detail.component';
 import { GalleryModule } from 'ng-gallery';
 import { LightboxModule } from 'ng-gallery/lightbox';
+import { TravelGuideComponent } from './travel-guide/travel-guide.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { LightboxModule } from 'ng-gallery/lightbox';
     SettingComponent,
     FriendComponent,
     MyTripDetailComponent,
+    TravelGuideComponent
     
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

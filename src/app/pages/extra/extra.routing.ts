@@ -9,6 +9,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { MapComponent } from './map/map.component';
 import { SettingComponent } from './setting/setting.component';
 import { MyTripDetailComponent } from './my-trip/my-trip-detail/my-trip-detail.component';
+import { TravelGuideComponent } from './travel-guide/travel-guide.component';
 
 export const ExtraRoutes: Routes = [
   {
@@ -50,6 +51,11 @@ export const ExtraRoutes: Routes = [
         path: 'setting',
         component: SettingComponent,
       },
+      {
+        path: 'travel-guide',
+        component: TravelGuideComponent,
+      },
+      
       
     ],
   },
