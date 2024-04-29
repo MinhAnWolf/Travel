@@ -20,12 +20,14 @@ export class AppSideLoginComponent {
   email: FormControl;
   password: FormControl;
 
+  toastRef: any;
+
   constructor(
     private router: Router,
     private auth: AuthenticationService,
     private toast: ToastrService,
     private spinner: NgxSpinnerService,
-    private storageUtil: StorageUtil
+    private storageUtil: StorageUtil,
   ) {
     this.initForm();
   }
@@ -50,7 +52,11 @@ export class AppSideLoginComponent {
         this.router.navigate(['/dashboard']);
       }
     }, error => {
-      this.toast.error('Tài khoản hoặc mật khẩu không đúng');
+      this.toastRef = this.toast.error("Tài khoản hoặc mật khẩu không đúng", "Đăng nhập thất bại", {
+        disableTimeOut: false,
+        tapToDismiss: false,
+        toastClass: "toast-icon custom-toast-error"
+      });
       this.spinner.hide();
     })
   }

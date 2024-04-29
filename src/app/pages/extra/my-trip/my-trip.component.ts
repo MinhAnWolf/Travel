@@ -101,13 +101,11 @@ export class MyTripComponent {
 
   showSuccessToast() {
     this.toastRef = this.toastr.success("The reboot request was unsuccessful", "Device Unreachable", {
-      disableTimeOut: true,
+      disableTimeOut: false,
       tapToDismiss: false,
       positionClass: 'toast-top-right',
       toastClass: "toast-icon custom-toast-success"
-  });
-
-
+    });
   }
 
   showWarningToast() {

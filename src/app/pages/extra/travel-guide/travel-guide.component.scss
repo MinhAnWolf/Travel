@@ -1,0 +1,22 @@
+/* Đảm bảo phần tử cha của .ng-dropdown-panel cũng có z-index được đặt */
+.container {
+    position: relative;
+    z-index: 9999; /* Đảm bảo phần tử cha có z-index cao hơn */
+}
+
+.ng-select-wrapper {
+    position: relative;
+}
+
+/* Sử dụng ::ng-deep để ghi đè CSS cho ng-dropdown-panel */
+::ng-deep .ng-dropdown-panel {
+    position: absolute;
+    z-index: 10000; /* Giá trị z-index cao hơn để đảm bảo hiển thị trên các phần tử cha */
+    /* Thêm các thuộc tính CSS khác tùy thuộc vào yêu cầu cụ thể */
+}
+
+/* Hiệu ứng hover cho ảnh trong thẻ card */
+.cardWithShadow:hover .card-img {
+    transform: scale(1.1); /* Phóng to ảnh khi hover */
+    transition: transform 0.3s ease; /* Hiệu ứng chuyển động mềm mại trong 0.3 giây */
+}
