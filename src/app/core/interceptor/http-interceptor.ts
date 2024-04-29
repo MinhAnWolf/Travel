@@ -25,7 +25,7 @@ export class HttpInterceptorSupport implements HttpInterceptor {
             let rfRes = res.headers.get('rf');
             let c_id = res.headers.get('c_id');
             if (authRes != null) {
-              this.storageUtil.setCookie("Authorization", authRes)
+              this.storageUtil.setCookie("Authorization", "Bearer " + authRes)
             }
 
             if (rfRes != null) {
