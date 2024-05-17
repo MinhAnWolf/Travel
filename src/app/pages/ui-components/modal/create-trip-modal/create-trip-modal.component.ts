@@ -9,6 +9,7 @@ import { TripService } from 'src/app/core/services/trip.service';
 import { UploadDriveService } from 'src/app/core/services/upload-drive.service';
 import { MyFriendResponse } from 'src/app/model/friend.model';
 import { UploadDriveResponse } from 'src/app/model/upload-drive.models';
+import {Utils} from "../../../../shared/common/Utils";
 
 @Component({
   selector: 'app-create-trip-modal',
@@ -58,17 +59,14 @@ export class CreateTripModalComponent implements OnInit {
       file,
       preview: URL.createObjectURL(file)
     }));
-
-    console.log(this.uploadedFiles)
-    console.log('Files changed!');
   }
 
   getMyFriend() {
     const payload = {
       id: '19aefef3-4ae9-455a-87e9-dbf6ed496c98'
     };
-    
-    this.friendService.getMyFriend(payload).subscribe( 
+
+    this.friendService.getMyFriend(payload).subscribe(
       (res) => {
         this.listMyFriend = res.data.map((friend: any) => ({
           idUser: friend.idUser,
@@ -109,47 +107,40 @@ export class CreateTripModalComponent implements OnInit {
 
   async create() {
     try {
-      // Mảng chứa các promise cho việc tải lên hình ảnh
-      const uploadPromises = [];
-  
-      // Lặp qua từng hình ảnh trong uploadedFiles
-      for (const uploadedFile of this.uploadedFiles) {
-        const base64Data: string = await this.blobToBase64(uploadedFile.preview);
-        const base64DataOnly = base64Data.split(',')[1];
-        
-        // Thêm promise cho việc tải lên hình ảnh vào mảng
-        uploadPromises.push(
-          new Promise<void>((resolve, reject) => {
-            this.uploadDriveService.upload(base64DataOnly).subscribe((res: any) => {
-              const itemImage = {
-                linkImage : res.link
-              }
-              this.listImage.push(itemImage);
-              resolve();
-            }, error => {
-              reject(error);
-            });
-          })
-        );
+      //upload image to server
+      if (Utils.checkNull(this.uploadedFiles)) {
+        const uploadPromises = [];
+        for (const uploadedFile of this.uploadedFiles) {
+          const base64Data: string = await Utils.blobToBase64(uploadedFile.preview);
+          const base64DataOnly = base64Data.split(',')[1];
+          uploadPromises.push(
+            new Promise<void>((resolve, reject) => {
+              this.uploadDriveService.upload(base64DataOnly).subscribe((res: any) => {
+                const itemImage = {
+                  linkImage : res.link
+                }
+                this.listImage.push(itemImage);
+                resolve();
+              }, error => {
+                reject(error);
+              });
+            })
+          );
+        }
+        //waiting upload success
+        await Promise.all(uploadPromises);
       }
-  
-      // Chờ tất cả các promise tải lên hoàn thành
-      await Promise.all(uploadPromises);
-  
-      // Sau khi tất cả các hình ảnh được tải lên, tiến hành tạo chuyến đi
+
+      // after upload image success then continue process create trip
       const payload = {
         title : this.form.value?.title,
         address: this.form.value?.address,
-        startDate: this.formatDate(this.form.value.startDate),
-        endDate: this.formatDate(this.form.value.endDate),
+        startDate: Utils.formatDate(this.form.value.startDate),
+        endDate: Utils.formatDate(this.form.value.endDate),
         description : this.form.value?.description,
         images : this.listImage,
         members : this.form.value?.members
       };
-  
-      console.log(payload);
-  
-      // Gọi hàm createTrip sau khi tải lên hình ảnh hoàn tất
       this.tripService.createTrip(payload).subscribe(res => {
         console.log(res);
       });
@@ -157,45 +148,4 @@ export class CreateTripModalComponent implements OnInit {
       console.error('Error creating trip:', error);
     }
   }
-  
-
-
-  // Function to format the date to yyyy-mm-dd format
-  formatDate(dateString: string): string {
-    const date = new Date(dateString);
-    return `${date.getFullYear()}-${this.padZero(date.getMonth() + 1)}-${this.padZero(date.getDate())}`;
-  }
-
-  // Function to add zero padding if needed
-  padZero(num: number): string {
-    return num < 10 ? '0' + num : num.toString();
-  }
-  
-  
-
-
-
-
-  private async blobToBase64(blobUrl: string): Promise<string> {
-    return new Promise((resolve, reject) => {
-      const xhr = new XMLHttpRequest();
-      xhr.onload = () => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          resolve(reader.result as string);
-        };
-        reader.onerror = () => {
-          reject('Error occurred while reading the blob as base64.');
-        };
-        reader.readAsDataURL(xhr.response);
-      };
-      xhr.onerror = () => {
-        reject('Error occurred while fetching the blob.');
-      };
-      xhr.open('GET', blobUrl);
-      xhr.responseType = 'blob';
-      xhr.send();
-    });
-  }
-  
 }

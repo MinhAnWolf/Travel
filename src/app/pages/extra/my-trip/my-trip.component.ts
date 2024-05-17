@@ -2,17 +2,6 @@ import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { TripData } from 'src/app/model/timeline-trip.model';
 
-
-// ecommerce card
-interface productcards {
-  id: number;
-  imgSrc: string;
-  title: string;
-  price: string;
-  rprice: string;
-}
-
-
 @Component({
   selector: 'app-my-trip',
   templateUrl: './my-trip.component.html',
@@ -87,9 +76,8 @@ export class MyTripComponent {
 				}
 			]
     },
-    
-  ];
 
+  ];
 
   constructor(
     private toastr: ToastrService
@@ -134,8 +122,4 @@ export class MyTripComponent {
   removeToast() {
     this.toastr.clear(this.toastRef.ToastId);
   }
-
-  
-
-
 }
