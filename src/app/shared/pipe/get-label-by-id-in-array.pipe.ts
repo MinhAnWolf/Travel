@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-    name: 'getLabelByIdInArray'
+  standalone: true,
+  name: 'getLabelByIdInArray'
 })
 export class GetLabelByIdInArrayPipe implements PipeTransform {
     constructor() {}
