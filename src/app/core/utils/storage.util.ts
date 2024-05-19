@@ -30,4 +30,10 @@ export class StorageUtil{
   public setCookie(key:string, value:any) {
     this.cookieService.set(key, value, undefined, "/", undefined, false, 'Strict')
   }
+
+  public clearCookies() {
+    this.cookieService.delete("Authorization", "/");
+    this.cookieService.delete("rf", "/");
+    this.cookieService.delete("c_id", "/");
+  }
 }

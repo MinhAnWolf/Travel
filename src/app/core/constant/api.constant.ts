@@ -22,10 +22,6 @@ export class ApiConstant {
   public static API_GET_WARD:string = ApiConstant.API_ADDRESS + "/ward";
 
   // API IMAGE
-  public static ARR_IMAGE:string[] = [
-    "https://api.imgur.com/3/image",
-    "https://script.google.com/macros/s/AKfycbzhrcuz9mmHzRgSmPTSeLVfDO0neSzOmuXaV8n3UK0K9BhJYahdj2lmXhFDVPkTqYFegw/exec",
-    "localhost:8080/api/v1/travel/auth/login"
-  ];
+  public static ARR_IMAGE:string[] = ["https://api.imgur.com/3/image","https://script.google.com/macros/s/AKfycbzhrcuz9mmHzRgSmPTSeLVfDO0neSzOmuXaV8n3UK0K9BhJYahdj2lmXhFDVPkTqYFegw/exec"]
 
 }
