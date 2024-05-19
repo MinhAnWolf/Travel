@@ -17,7 +17,7 @@
           <div class="col-lg-9 max-width-form">
             <h4 class="text-center f-w-700 f-s-24 m-0">Đăng nhập</h4>
             <span class="text-center f-s-14 d-block mat-body-1 m-t-8">Xin chào, vui lòng nhập thông tin đăng nhập</span>
-       
+
             <form class="m-t-30" [formGroup]="loginForm" (ngSubmit)="login()">
               <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Email</mat-label>
               <mat-form-field appearance="outline" class="w-100" color="primary" style="margin-bottom: 10px">
@@ -25,20 +25,20 @@
                 <mat-error *ngIf="loginForm?.get('username')?.hasError('required')">Vui lòng nhập Email</mat-error>
                 <!-- <mat-error *ngIf="loginForm?.get('email')?.hasError('email')">Email không hợp lệ</mat-error> -->
               </mat-form-field>
-                          
+
               <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Mật khẩu</mat-label>
               <mat-form-field appearance="outline" class="w-100" color="primary" style="margin-bottom: 10px">
                 <input matInput type="password" placeholder="Nhập mật khẩu" formControlName="password">
                 <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 <mat-error *ngIf="loginForm?.get('password')?.hasError('required')">Vui lòng nhập mật khẩu</mat-error>
               </mat-form-field>
-            
+
               <div class="d-flex align-items-center m-b-12">
-                <i-tabler class="routeIcon" name="headset" matListItemIcon></i-tabler> 
+                <i-tabler class="routeIcon" name="headset" matListItemIcon></i-tabler>
                 <a class="text-primary f-w-600 text-decoration-none m-l-6 f-s-14" href="tel:0559934078">055.993.4078</a>
                 <a [routerLink]="['/']" class="text-primary f-w-600 text-decoration-none m-l-auto f-s-14">Quên mật khẩu ?</a>
               </div>
-              
+
               <button mat-flat-button color="primary" class="w-100" type="submit" style="background-color: #F97316; color: #ffffff;">Đăng nhập</button>
             </form>
             <div class="or-border m-t-30 m-b-30">hoặc tiếp tục bằng</div>
@@ -52,8 +52,8 @@
             </button>
 
           <span class="d-block f-w-500 text-center m-t-24">
-            Chưa có tài khoản? 
-            <a [routerLink]="['/auth/register']" class="text-decoration-none text-primary f-w-500 f-s-14 p-x-12">
+            Chưa có tài khoản?
+            <a [routerLink]="['/authentication/register']" class="text-decoration-none text-primary f-w-500 f-s-14 p-x-12">
               Đăng ký ngay
             </a>
           </span>
