@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateTripModalComponent } from 'src/app/pages/ui-components/modal/create-trip-modal/create-trip-modal.component';
+import {Utils} from "../../../shared/common/Utils";
 
 @Component({
   selector: 'app-branding',
@@ -35,22 +36,10 @@ export class BrandingComponent {
     private dialog: MatDialog,
   ) {}
 
-
   /**
-   * Open modal view detail.
-   *
-   * @param element
-   * @param action
-   */
-  public openModal(): void {
-    const dialogRef = this.dialog.open(CreateTripModalComponent, {
-      data: {}
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-      }
-    });
+   * Open modal CreateTripModalComponent.
+   * */
+  public openModal() {
+    Utils.openModal(this.dialog, CreateTripModalComponent);
   }
-
-
 }

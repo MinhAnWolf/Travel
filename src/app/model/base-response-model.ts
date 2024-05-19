@@ -1,5 +1,5 @@
-export class BaseResponseModelModel {
-  errorCode:Number;
+export class BaseResponse {
+  errCode:Number;
   data:any;
   message:string;
 }

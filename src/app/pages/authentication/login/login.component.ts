@@ -63,7 +63,6 @@ export class AppSideLoginComponent {
 
   initForm() {
     this.loginForm = new FormGroup({
-      // email: new FormControl('', [Validators.required, Validators.email]),
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
       remember: new FormControl()

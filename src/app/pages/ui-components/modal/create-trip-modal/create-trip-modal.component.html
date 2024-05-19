@@ -7,17 +7,21 @@
       <div class="col-lg-6">
         <div class="col-lg-12">
           <mat-label class="mat-subtitle-2 f-w-600">Tiêu đề chuyến đi</mat-label>
-          <span class="mat-body-1 f-s-12 m-b-8 d-block">Bạn có thể thay đổi lại sau </span>
           <mat-form-field appearance="outline" class="w-100 mb-15">
             <input matInput placeholder="Cho tôi một tiêu đề" formControlName="title">
+            <mat-error *ngIf="form?.get('title')?.hasError('required')">Vui lòng nhập tiêu đề</mat-error>
           </mat-form-field>
         </div>
         <div class="col-lg-12 m-b-16">
           <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Địa điểm bạn muốn đi</mat-label>
-          <ng-select [items]="listAddress" [virtualScroll]="true" bindLabel="name" bindValue="code"
+<!--          <mat-form-field appearance="outline" class="w-100 mb-15">-->
+            <ng-select [items]="listAddress" [virtualScroll]="true" bindLabel="name" bindValue="code"
             placeholder="Chọn điểm du lịch" [clearable]="false" formControlName="address">
-          </ng-select>
+            </ng-select>
+            <mat-error *ngIf="form?.get('address')?.hasError('required')">Vui lòng nhập tiêu đề</mat-error>
+<!--          </mat-form-field>-->
         </div>
+
         <div class="col-lg-12">
           <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Chọn thời gian</mat-label>
           <mat-form-field appearance="outline" class="w-100">
@@ -27,6 +31,8 @@
             </mat-date-range-input>
             <mat-datepicker-toggle matIconSuffix [for]="campaignTwoPicker"></mat-datepicker-toggle>
             <mat-date-range-picker #campaignTwoPicker></mat-date-range-picker>
+            <mat-error *ngIf="form?.get('startDate')?.hasError('required')">Vui lòng nhập ngày bắt đầu</mat-error>
+            <mat-error *ngIf="form?.get('endDate')?.hasError('required')">Vui lòng nhập ngày kết thúc</mat-error>
           </mat-form-field>
         </div>
         <div class="col-lg-12">
@@ -68,7 +74,7 @@
     </div>
     <div mat-dialog-actions class="action">
       <button mat-stroked-button mat-dialog-close>Hủy bỏ</button>
-      <button mat-stroked-button type="submit" style="background-color: #F97316; color: #ffffff;" (click)="create()">
+      <button [disabled]="form.invalid" mat-stroked-button type="submit" style="background-color: #F97316; color: #ffffff;" (click)="create()">
         Tạo chuyến đi
       </button>
     </div>

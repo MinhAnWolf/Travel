@@ -1,11 +1,9 @@
-import {CanActivateFn, CanMatchFn, Router} from '@angular/router';
+import {CanActivateFn, Router} from '@angular/router';
 import {StorageUtil} from "../core/utils/storage.util";
 import {inject} from "@angular/core";
 import {AuthenticationService} from "../core/services/authentication.service";
 import {TokenModel} from "../model/token.model";
-import {BaseResponseModelModel} from "../model/base-response-model";
-import {ResponseAuthModel} from "../model/response-auth.model";
-import {ValueCommon} from "../shared/common/ValueCommon";
+import {ConstantCommon} from "../shared/common/ConstantCommon";
 
 export const AuthGuard: CanActivateFn = (route, state) => {
   let util = inject(StorageUtil)
@@ -13,11 +11,11 @@ export const AuthGuard: CanActivateFn = (route, state) => {
   const  rf = util.getCookieRf;
   const router = inject(Router);
   const authenticationService = inject(AuthenticationService);
-  const valueCommon = inject(ValueCommon);
+  const constantCommon = inject(ConstantCommon);
   let result:boolean = true;
-  if (at.valueOf() == valueCommon.UNDEFINED_VALUE || rf.valueOf() == valueCommon.UNDEFINED_VALUE
-    || at == valueCommon.NULL_VALUE || rf == valueCommon.NULL_VALUE) {
-      router.navigate([valueCommon.ROUTER_LOGIN]).then(r =>
+  if (at.valueOf() == constantCommon.UNDEFINED_VALUE || rf.valueOf() == constantCommon.UNDEFINED_VALUE
+    || at == constantCommon.NULL_VALUE || rf == constantCommon.NULL_VALUE) {
+      router.navigate([constantCommon.ROUTER_LOGIN]).then(r =>
         console.log(r)
       )
      return !result;
@@ -28,7 +26,7 @@ export const AuthGuard: CanActivateFn = (route, state) => {
   tokenModel.refreshToken = rf;
   authenticationService.apiAuthenticationToken(tokenModel).subscribe(data => {
     if (data != true) {
-      router.navigate([valueCommon.ROUTER_LOGIN]).then(r =>
+      router.navigate([constantCommon.ROUTER_LOGIN]).then(r =>
         console.log(r)
       )
       result = false;

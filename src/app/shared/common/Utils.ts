@@ -1,3 +1,6 @@
+import {CreateTripModalComponent} from "../../pages/ui-components/modal/create-trip-modal/create-trip-modal.component";
+import {MatDialog} from "@angular/material/dialog";
+import {FormGroup} from "@angular/forms";
 
 /**
  * Support method common.
@@ -7,7 +10,7 @@ export class Utils {
   /**
    * Check null data
    * */
-  public static checkNull(data:any) {
+  public static checkObjNull(data:any) {
     return data == null;
   }
 
@@ -48,6 +51,26 @@ export class Utils {
       xhr.open('GET', blobUrl);
       xhr.responseType = 'blob';
       xhr.send();
+    });
+  }
+
+  /**
+   * Check null everywhere.
+   * */
+  public static checkStrNull(obj:string):boolean {
+     return obj == null || obj === "";
+  }
+
+  /**
+   * Open modal.
+   * */
+  public static openModal(dialog: MatDialog, modalComponent:any ): void {
+    const dialogRef = dialog.open(modalComponent, {
+      data: {}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+      }
     });
   }
 }
