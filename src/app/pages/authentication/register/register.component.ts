@@ -23,13 +23,6 @@ export class AppSideRegisterComponent {
     this.initForm();
   }
 
-  // email: FormControl;
-  // username: FormControl;
-  // password: FormControl;
-
-  // toastRef: any;
-
-
   initForm() {
     this.registerForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -38,28 +31,13 @@ export class AppSideRegisterComponent {
     });
   }
 
-  // registerForm = new FormGroup({
-  //   username: new FormControl('', [Validators.required, Validators.minLength(6)]),
-  //   email: new FormControl('', [Validators.required]),
-  //   password: new FormControl('', [Validators.required]),
-  // });
- 
-
   get f() {
     return this.registerForm.controls;
   }
 
-  // submit() {
-  //   // console.log(this.form.value);
-  //   this.router.navigate(['/dashboard']);
-  // }
-
-
-
   register(){
     this.spinner.show();
     let user: UserModel = <UserModel> this.registerForm.value;
-    // alert("Bat dau dang ki");
     this.auth.apiRegister(user).subscribe(
       (data) => {
         this.spinner.hide();
@@ -67,18 +45,8 @@ export class AppSideRegisterComponent {
           timeOut: 3000,
         });
         this.router.navigate(['/authentication/login']);
-      // this.toastRef.success('Đăng ký tài khoản thành công!', 'Hoàn thành đăng ký', {
-      //   timeOut: 3000,
-      // });
-      // // this.router.navigate(['/authentication/login']);
     }, 
     (error) => {
-      // this.toastRef = this.toast.error("Thông tin không đúng định dạng", "Đăng ký thất bại", {
-      //   disableTimeOut: false,
-      //   tapToDismiss: false,
-      //   toastClass: "toast-icon custom-toast-error"
-      // });
-      // this.spinner.hide();
       this.spinner.hide();
       this.toast.error("Thông tin không đúng định dạng", "Đăng ký thất bại", {
         disableTimeOut: false,

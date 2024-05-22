@@ -23,10 +23,8 @@ export class AuthenticationService {
   public apiLogout() {
     this.storageUtil.clearCookies();
   }
-
-  //////////////////////////////////////
+  
   public apiRegister(payload:UserModel): Observable<any> {
-    console.log(payload);
     return this.http.post(ApiConstant.API_REGISTER, payload);
   }
 }
